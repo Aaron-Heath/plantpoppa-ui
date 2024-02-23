@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom';
 import './pageheader.css'
 
 export default function PageHeader() {
@@ -9,6 +10,13 @@ export default function PageHeader() {
       display: "flex",
       justifyContent: "center"
     }
+  }
+
+  const location = useLocation();
+  console.log(location.pathname)
+
+  if(location.pathname == "/") {
+    return;
   }
 
   return (

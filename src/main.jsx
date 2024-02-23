@@ -10,6 +10,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import LoginRegister from './pages/LoginRegister.jsx';
+import Home from './pages/home'
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <div>Hello, World.</div>
+        element: <Home/>
       },
     {
       path: "/login",
