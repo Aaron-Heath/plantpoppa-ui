@@ -10,7 +10,7 @@ function createRedirects() {
 
     const DATA = 
 `# proxy to api
-/api/*    ${process.env.PP_AUTH_URL}/:splat 200`;
+/api/* ${process.env.PP_AUTH_URL}/:splat 200!`;
     fs.writeFile('dist/_redirects', DATA, (err) => {
         if (err) throw err;
     });
