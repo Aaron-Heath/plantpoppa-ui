@@ -11,7 +11,7 @@ function createRedirects() {
     const DATA = 
     `# proxy to api
     /api/*    ${process.env.PP_AUTH_URL} 200`;
-    fs.writeFile('opt/build/repo/dist/_redirects', DATA, (err) => {
+    fs.writeFile('dist/_redirects', DATA, (err) => {
         if (err) throw err;
     });
 
