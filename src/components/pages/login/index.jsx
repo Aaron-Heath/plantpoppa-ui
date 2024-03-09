@@ -1,11 +1,10 @@
 import React from 'react'
-
-import SignupForm from './SignupForm'
+import LoginForm from './LoginForm'
 
 export default function index() {
   return (
     <div className='d-flex justify-content-center'>
-        <SignupForm/>
+        <LoginForm/>
     </div>
   )
 }
