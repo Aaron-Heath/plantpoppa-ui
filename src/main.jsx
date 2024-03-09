@@ -4,13 +4,15 @@ import App from './App.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import './index.css'
+import './App.css'
 
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import LoginRegister from './pages/LoginRegister.jsx';
-import Home from './pages/home'
+import LoginRegister from './components/pages/LoginRegister.jsx';
+import Home from './components/pages/home'
+import SignupPage from './components/pages/signup'
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,10 @@ const router = createBrowserRouter([
       path: "/login",
       element: <LoginRegister/>
     },
+    {
+      path: "/signup",
+      element: <SignupPage/>
+    }
     ]
   }
 
