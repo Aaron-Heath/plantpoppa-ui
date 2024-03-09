@@ -1,0 +1,16 @@
+.login-toggle {
+    border: 2px var(--accentgreen) solid;
+    border-radius: 0;
+    background-color: var(--lightgreen);
+    color: var(--dargreen);
+    padding: 1px 6px;
+    min-width: 70px !important;
+
+    font-size: 10px;
+    font-weight: bold;
+
+}
+
+.login-toggle.current {
+    background-color: var(--offwhite);
+}
