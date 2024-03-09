@@ -20,7 +20,7 @@ export default function index() {
         }
     }
 
-    switch(window.location) {
+    switch(window.location.pathname) {
         case loginPath:
            return (
             <>
