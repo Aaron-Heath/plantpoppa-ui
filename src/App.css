@@ -44,5 +44,7 @@
   background-color: var(--darkgreen) !important;
   color: var(--accentgreen) !important;
   font-weight: bold !important;
+
+  border-radius: 12px !important;
 }
 

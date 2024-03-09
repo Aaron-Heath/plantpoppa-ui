@@ -4,6 +4,8 @@ import './style.css'
 import LoginToggle from '../../../LoginToggle'
 
 export default function SignupForm() {
+    // TODO: Connect to backend for register request
+
   return (
     <form className='signup-login-form'>
         <h2>Register</h2>
@@ -36,8 +38,8 @@ export default function SignupForm() {
                 <input type="text" className='form-control' placeholder="Password"/>
             </div>
         </div>
-        <div className='row' >
-            <button className='btn btn-primary' type='submit'>Register</button>
+        <div className='row d-flex justify-content-center' >
+            <button id="submit" className='btn btn-primary' type='submit'>Register</button>
         </div>
         <LoginToggle/>      
     </form>
