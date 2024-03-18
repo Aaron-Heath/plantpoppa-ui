@@ -1,9 +1,40 @@
 h1 {
     /* color: var(--accentgreen); */
-    margin-top: 25%;
+    margin-top: 40%;
 }
 
 h3 {
     color: var(--accentorange);
+    margin-bottom: 50px;
+}
+
+#landing {
+    margin: auto 2%;
+}
+
+.landing-text {
+    padding: 0 40px;
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+
+#button-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 50px;
+}
+
+#login-referral {
+    font-size: 20px;
+}
+
+p.offwhite {
+    margin:0;
+}
+
+a {
+    text-decoration: underline;
 }
 

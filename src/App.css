@@ -16,6 +16,14 @@
   --offwhite: #f5fbfdff;
 }
 
+.offwhite {
+  color: var(--offwhite);
+}
+
+.bold {
+  font-weight: bold;
+}
+
 .logo {
   font-family: "Pacifico";
   color: var(--accentgreen);
