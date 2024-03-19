@@ -1,8 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-nav {
-    font-family:"Pacifico", cursive;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 25px
+.page-header {
+    background-color: var(--lightgreen);
+
+    display: flex;
+    justify-content: right;
+    padding: 0;
+
+    height: 62px;
 }
