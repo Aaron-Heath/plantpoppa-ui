@@ -8,6 +8,11 @@
   text-align: center;
 }
 
+main {
+  position: relative;
+  min-height: 100vh;
+}
+
 :root {
   --darkgreen: #124244;
   --lightgreen: #5c8689ff;
