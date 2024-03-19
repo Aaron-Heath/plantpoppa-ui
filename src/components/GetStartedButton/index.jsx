@@ -6,7 +6,7 @@ export default function GetStartedButton() {
     const navigate = useNavigate();
 
 const handleClick = (e) => {
-    navigate('/login');
+    navigate('/signup');
     return;
 }
   return (
