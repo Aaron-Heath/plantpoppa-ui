@@ -22,7 +22,7 @@ export default function LoginForm() {
         <div className='row d-flex justify-content-center' >
             <button id="login" className='btn btn-primary' type='submit'>Login</button>
         </div>
-        <LoginToggle/>      
+        {/* <LoginToggle/>       */}
     </form>
     </div>
   )
