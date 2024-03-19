@@ -1,6 +1,6 @@
 import GetStartedButton from '../../GetStartedButton'
-import LandingHeader from './components/LandingHeader'
-import LandingFooter from './components/LandingFooter'
+import LandingHeader from '../../LandingHeader'
+import LandingFooter from '../../LandingFooter'
 import './home.css'
 
 export default function Home() {
