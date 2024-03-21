@@ -8,7 +8,7 @@ export default function SignupForm() {
 
   return (
     <form className='signup-login-form'>
-        <h2>Register</h2>
+        <h2>Sign Up</h2>
         <div className='row'>
             <div className='col'>
                 <input type="text" className='form-control' placeholder="First Name"/>
@@ -39,7 +39,7 @@ export default function SignupForm() {
             </div>
         </div>
         <div className='row d-flex justify-content-center' >
-            <button id="submit" className='btn btn-primary' type='submit'>Register</button>
+            <button id="submit" className='btn btn-primary' type='submit'>Submit</button>
         </div>
         <LoginToggle/>      
     </form>

@@ -31,6 +31,10 @@ main {
   font-weight: bold;
 }
 
+.large-font {
+  font-size: 35px;
+}
+
 .login-signup-redirect {
   margin-top: 20px;
 }
@@ -49,6 +53,7 @@ main {
 .signup-login-form {
   background-color: var(--offwhite);
   max-width: 300px;
+  margin-top: 30px;
   padding: 30px;
   border-radius: 15px;
   border: 1px solid #595959;
