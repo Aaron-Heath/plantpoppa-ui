@@ -9,22 +9,7 @@ export default function index({ pagePath }) {
     const signupPath = '/signup';
     const loginPath = '/login';
 
-    const handleClick = (e) => {
-        e.preventDefault();
-
-        if(e.target.matches("#login-btn")) {
-            window.location.pathname = loginPath
-            return;
-        }
-
-        if (e.target.matches("#register-btn")) {
-            window.location.pathname = signupPath;
-            return;
-        }
-    }
-
     const handleNavigate =(e) => {
-        console.log(pagePath);
         e.preventDefault();
         navigate(pagePath == loginPath ? signupPath : loginPath);
         return;
