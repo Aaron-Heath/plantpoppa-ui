@@ -2,6 +2,8 @@ import { Outlet } from 'react-router-dom'
 import { useState } from 'react'
 import './App.css'
 import PageHeader from './components/pageheader'
+import LandingHeader from './components/LandingHeader'
+import LandingFooter from './components/LandingFooter'
 
 function App() {
   // Responsiveness viewport height for mobile browsers
@@ -17,10 +19,11 @@ function App() {
 
   return (
     <>
-    {/* <PageHeader/> */}
+    <LandingHeader/>
       <main>
         <Outlet/>
       </main>
+    <LandingFooter/>
     </>
   )
 }

@@ -2,15 +2,17 @@
 
 
 #root {
-  /* max-width: 1280px; */
   margin: 0;
   padding: 0;
   text-align: center;
 }
 
 main {
-  position: relative;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 100%;
   height: calc(var(--vh, 1vh) * 100);
 }
 
