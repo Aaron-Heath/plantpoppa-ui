@@ -2,6 +2,6 @@
     background-color: var(--lightgreen);
 
     display: flex;
-    justify-content: right;
-    padding: 15px 10px;
+    justify-content: right !important;
+    padding: 15px 10px !important;
 }
