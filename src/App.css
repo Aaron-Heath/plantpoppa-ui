@@ -31,6 +31,16 @@ main {
   font-weight: bold;
 }
 
+.login-signup-redirect {
+  margin-top: 20px;
+}
+
+.login-signup-redirect a {
+  color: black;
+  color: var(--darkgreen);
+  font-weight: normal;
+}
+
 .logo {
   font-family: "Pacifico";
   color: var(--accentgreen);
