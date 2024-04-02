@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api' : {
-        target: process.env.AUTH_API || "http://localhost:8080",
+        target: 'https://plantpoppa-auth-render.onrender.com',
         changeOrigin: true,
       }
     }
