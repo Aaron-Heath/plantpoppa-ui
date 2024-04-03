@@ -6,8 +6,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api' : {
-        target: 'https://plantpoppa-auth-render.onrender.com',
+      '/auth' : {
+        target: process.env.NODE_ENV == "production" ? 'https://plantpoppa-auth-render.onrender.com' : "http://localhost:8080",
         changeOrigin: true,
       }
     }
