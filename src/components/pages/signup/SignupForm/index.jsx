@@ -2,15 +2,18 @@ import React from 'react'
 import './style.css'
 
 import LoginToggle from '../../../LoginToggle'
+import { useNavigate } from 'react-router-dom'
 
 export default function SignupForm() {
-    // TODO: Connect to backend for register request
+
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const reqPath = '/api/user/register'
 
         const signupData = {
-            firstName: document.getElementById("firstname").value,
-            lastName: document.getElementById("lastname").value,
+            firstname: document.getElementById("firstname").value,
+            lastname: document.getElementById("lastname").value,
             email: document.getElementById("email").value,
             password: document.getElementById("password").value,
             phone: document.getElementById("phone").value,
@@ -19,19 +22,22 @@ export default function SignupForm() {
         console.log(signupData);
 
         // Beginning of error handling
-        if (!signupData.firstName || !signupData.lastName || !signupData.email || !signupData.password) {
+        if (!signupData.firstname || !signupData.lastname || !signupData.email || !signupData.password) {
             alert("Must provide required fields");
             return;
         }
 
-        const response = await fetch('/api/user/',{
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(signupData),
+        const response = await fetch(reqPath,{
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(signupData),
+            redirect: "follow",
         });
 
-        console.log(await response.json());
+        const data = await response.json();
+        navigate('/login');
     } 
 
   return (
@@ -63,7 +69,7 @@ export default function SignupForm() {
         </div>
         <div className='row'>
             <div className='col'>
-                <input type="text" className='form-control' placeholder="Password" id="password" required/>
+                <input type="password" className='form-control' placeholder="Password" id="password" required/>
             </div>
         </div>
         <div className='row d-flex justify-content-center' >

@@ -9,15 +9,14 @@ import './style.css'
 
 export default function LoginForm() {
     const navigate = useNavigate();
-    
+
 
 
     //TODO: Handle form submit
     const handleSubmit = async (e) => {
-        event.preventDefault();
+        e.preventDefault();
         const reqPath = "/auth/basic";
 
-        const fetchURL = process.env.NODE_ENV == "production" ?  new URL(process.env.REACT_AUTH_API + reqPath) : new URL("http://localhost:8080" + reqPath);
 
         // get data
         const payload = {

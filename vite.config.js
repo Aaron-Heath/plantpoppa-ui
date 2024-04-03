@@ -9,6 +9,10 @@ export default defineConfig({
       '/auth' : {
         target: process.env.NODE_ENV == "production" ? 'https://plantpoppa-auth-render.onrender.com' : "http://localhost:8080",
         changeOrigin: true,
+      },
+      '/api' : {
+        target: process.env.NODE_ENV == "production" ? 'https://plantpoppa-auth-render.onrender.com' : "http://localhost:8080",
+        changeOrigin: true,
       }
     }
   }
