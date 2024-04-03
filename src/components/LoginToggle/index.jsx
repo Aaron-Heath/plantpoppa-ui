@@ -1,40 +1,34 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 import './style.css'
 
-export default function index() {
+export default function index({ pagePath }) {
+
+    const navigate = useNavigate();
     const signupPath = '/signup';
     const loginPath = '/login';
 
-    const handleClick = (e) => {
+    const handleNavigate =(e) => {
         e.preventDefault();
-
-        if(e.target.matches("#login-btn")) {
-            window.location.pathname = loginPath
-            return;
-        }
-
-        if (e.target.matches("#register-btn")) {
-            window.location.pathname = signupPath;
-            return;
-        }
+        navigate(pagePath == loginPath ? signupPath : loginPath);
+        return;
     }
 
-    switch(window.location.pathname) {
+    switch(pagePath) {
         case loginPath:
-           return (
-            <>
-            <button onClick={handleClick} className='btn login-toggle current' id="login-btn">Login</button>
-            <button onClick={handleClick} className='btn login-toggle' id="register-btn">Register</button>
-            </>
-           );
-        
-           default:
+        return (
+            <div className='login-signup-redirect'>
+                <p>Don't have an account?</p>
+                <a href={signupPath} onClick={handleNavigate}>Sign Up Here</a>
+            </div>
+        )
+        default:
             return (
-                <>
-                <button onClick={handleClick} className='btn login-toggle' id="login-btn">Login</button>
-                <button onClick={handleClick} className='btn login-toggle current' id="register-btn">Register</button>
-                </>
-            );
+            <div className='login-signup-redirect'>
+                <p>Already have an account?</p>
+                <a href={loginPath} onClick={handleNavigate}>Login Here</a>
+            </div>
+            )
     }
 }

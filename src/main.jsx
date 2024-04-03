@@ -13,6 +13,7 @@ import {
 import Login from './components/pages/login'
 import Home from './components/pages/home'
 import SignupPage from './components/pages/signup'
+import AppHome from './components/pages/application/apphome/index.jsx'
 
 const router = createBrowserRouter([
   {
@@ -23,14 +24,18 @@ const router = createBrowserRouter([
         index: true,
         element: <Home/>
       },
-    {
-      path: "/login",
-      element: <Login/>
-    },
-    {
-      path: "/signup",
-      element: <SignupPage/>
-    }
+      {
+        path: "/login",
+        element: <Login/>
+      },
+      {
+        path: "/signup",
+        element: <SignupPage/>
+      },
+      {
+        path: '/app',
+        element: <AppHome/>
+      }
     ]
   }
 

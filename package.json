@@ -5,12 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "full-dev": "concurrently \"vite\" \"java -jar C:/Users/Aaron/JavaProjects/plantpoppa-auth/target/auth-0.0.1-SNAPSHOT.jar",
     "build": "vite build && node src/utils/redirects.js",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
+    "concurrently": "^8.2.2",
+    "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.1"
