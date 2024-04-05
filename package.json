@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "full-dev": "concurrently \"vite\" \"java -jar C:/Users/Aaron/JavaProjects/plantpoppa-auth/target/auth-0.0.1-SNAPSHOT.jar",
-    "build": "vite build && node src/utils/redirects.js",
+    "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
