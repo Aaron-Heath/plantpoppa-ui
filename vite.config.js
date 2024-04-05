@@ -7,11 +7,11 @@ export default defineConfig({
   server: {
     proxy: {
       '/auth' : {
-        target: 'https://plantpoppa-auth-render.onrender.com',
+        target: process.env.NODE_ENV == "production" ? 'https://plantpoppa-auth-render.onrender.com' : "http://localhost:8080",
         changeOrigin: true,
       },
       '/api' : {
-        target: 'https://plantpoppa-auth-render.onrender.com',
+        target: process.env.NODE_ENV == "production" ? 'https://plantpoppa-auth-render.onrender.com' : "http://localhost:8080",
         changeOrigin: true,
       }
     }
