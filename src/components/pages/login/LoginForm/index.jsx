@@ -15,7 +15,8 @@ export default function LoginForm() {
     //TODO: Handle form submit
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const reqPath = "/auth/basic";
+        const reqPath = process.env.NODE_ENV === "production" ? 
+        process.env.PP_AUTH_URL + "/auth/basic" : "/auth/basic";
 
 
         // get data

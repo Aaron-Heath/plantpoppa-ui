@@ -9,7 +9,8 @@ export default function SignupForm() {
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const reqPath = '/api/user/register'
+        const reqPath = process.env.NODE_ENV === "production" ? 
+        process.env.PP_AUTH_URL + "/api/user/register" : "/api/user/register";
 
         const signupData = {
             firstname: document.getElementById("firstname").value,
