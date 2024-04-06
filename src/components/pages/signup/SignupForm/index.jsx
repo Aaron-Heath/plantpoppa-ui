@@ -7,10 +7,10 @@ import { useNavigate } from 'react-router-dom'
 export default function SignupForm() {
 
     const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const reqPath = process.env.NODE_ENV === "production" ? 
-        process.env.REACT_APP_AUTH_API + "/api/user/register" : "/api/user/register";
+        const reqPath = import.meta.env.VITE_REACT_APP_AUTH_API + "/api/user/register";
 
         const signupData = {
             firstname: document.getElementById("firstname").value,

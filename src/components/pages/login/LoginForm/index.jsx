@@ -10,14 +10,9 @@ import './style.css'
 export default function LoginForm() {
     const navigate = useNavigate();
 
-
-
-    //TODO: Handle form submit
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const reqPath = process.env.NODE_ENV === "production" ? 
-        process.env.REACT_APP_AUTH_API + "/auth/basic" : "/auth/basic";
-
+        const reqPath = import.meta.env.VITE_REACT_APP_AUTH_API + "/auth/basic";
 
         // get data
         const payload = {
