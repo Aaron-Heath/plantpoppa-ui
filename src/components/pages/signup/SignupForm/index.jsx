@@ -10,7 +10,8 @@ export default function SignupForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const reqPath = import.meta.env.VITE_REACT_APP_AUTH_API + "/api/user/register";
+        // const reqPath = import.meta.env.VITE_REACT_APP_AUTH_API + "/api/user/register";
+        const reqPath = "/api/user/register"
 
         const signupData = {
             firstname: document.getElementById("firstname").value,
