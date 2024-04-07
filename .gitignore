@@ -1,6 +1,5 @@
 # .env
 .env
-netlify.toml
 
 # Logs
 logs

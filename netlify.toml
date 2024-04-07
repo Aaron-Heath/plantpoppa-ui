@@ -1,0 +1,11 @@
+[[redirects]]
+  from = "/api/user/*"
+  to = "https://plantpoppa-auth-render.onrender.com/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/auth/*"
+  to = "https://plantpoppa-auth-render.onrender.com/:splat"
+  status = 200
+  force = true
