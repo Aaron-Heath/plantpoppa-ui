@@ -22,6 +22,9 @@ main {
   --offwhite: #f5fbfdff;
   --button-radius: 8px;
 }
+.errorText {
+  color: rgb(174, 23, 23);
+}
 
 .offwhite {
   color: var(--offwhite);
