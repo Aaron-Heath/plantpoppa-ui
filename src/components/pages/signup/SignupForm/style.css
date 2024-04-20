@@ -2,3 +2,7 @@
     margin-top: 8px;
     width: 140px;
 }
+
+.missing {
+    border-color: rgb(174, 23, 23) !important;
+}
