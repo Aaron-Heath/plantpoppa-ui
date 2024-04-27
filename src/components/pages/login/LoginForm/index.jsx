@@ -5,6 +5,7 @@ import Auth from '../../../../utils/auth'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './style.css'
+import { buttonLoadingToggle } from '../../../../utils/providers'
 
 
 
@@ -15,23 +16,8 @@ export default function LoginForm() {
 
     const timeOutDelay = 800;
     const loginBtnId = "login";
-    const loadingBtnClass = "btn-loading";
 
-
-    // Toggle Loading Animation
-    const loadingToggle = (isLoading) => {
-        const submitButton = document.getElementById(loginBtnId);
-
-        if(isLoading) {
-            submitButton.classList.add(loadingBtnClass);
-            submitButton.disabled = true;
-            return;
-        }
-
-        submitButton.classList.remove(loadingBtnClass);
-        submitButton.disabled = false;
-        
-    }
+    const loadingToggle = buttonLoadingToggle(loginBtnId);
 
     // Error handlers
     const handleError = () => {
@@ -50,7 +36,6 @@ export default function LoginForm() {
         }, timeOutDelay);
     }
     
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -108,14 +93,7 @@ export default function LoginForm() {
                 handleError();
                 return;
             }
-
-
         }
-
-
-
-
-
     }
 
     const handleEdit = async (e) => {
@@ -144,7 +122,6 @@ export default function LoginForm() {
                 <span className='btn-text'>Login</span>
                 </button>
         </div>
-        
         <LoginToggle pagePath={'/login'}/>
     </form>
     </div>
