@@ -13,6 +13,42 @@ export default function LoginForm() {
     const [badLogin, setBadLogin] = useState(false);
     const [error, setError] = useState(false);
 
+    const timeOutDelay = 800;
+    const loginBtnId = "login";
+    const loadingBtnClass = "btn-loading";
+
+
+    // Toggle Loading Animation
+    const loadingToggle = (isLoading) => {
+        const submitButton = document.getElementById(loginBtnId);
+
+        if(isLoading) {
+            submitButton.classList.add(loadingBtnClass);
+            submitButton.disabled = true;
+            return;
+        }
+
+        submitButton.classList.remove(loadingBtnClass);
+        submitButton.disabled = false;
+        
+    }
+
+    // Error handlers
+    const handleError = () => {
+
+        setTimeout(() => {
+            setError(true);
+            loadingToggle(false);
+        }, timeOutDelay);
+    }
+
+    const handleBadLogin = () => {
+
+        setTimeout(() => {
+            setBadLogin(true);
+            loadingToggle(false);
+        }, timeOutDelay);
+    }
     
 
     const handleSubmit = async (e) => {
@@ -21,8 +57,7 @@ export default function LoginForm() {
         setBadLogin(false);
         setError(false);
         
-        const submitButton = document.getElementById("login");
-        submitButton.classList.add("btn-loading");
+        loadingToggle(true);
 
         const reqPath = import.meta.env.VITE_REACT_APP_AUTH_API + "/auth/basic";
         let response;
@@ -46,41 +81,31 @@ export default function LoginForm() {
         );
 
         if (response.status == 404) {
-            setTimeout(() => {
-                submitButton.classList.remove("btn-loading");
-                setBadLogin(true)}
-            , 1000);
+            handleBadLogin();
             return;
         }
 
-        try {
-
-            // Successful login
+        // Successful login
+        if(response.status === 200){
             const data = await response.json();
             Auth.login(data.jwt);
             navigate('/app');
-        } catch (error) {
-            console.log(error);
-            submitButton.classList.toggle("btn-loading")
-        }
+            return;
+        } else {
+            throw new Error("Something went wrong.");
+        } 
 
             
         } catch (error) {
             // No response
             if(!response) {
-                setTimeout(() => {
-                    submitButton.classList.remove("btn-loading");
-                    setError(true)}
-                , 1000);
+                handleError();
                 return;
             }
 
             console.log(error);
             if (response.status != 404) {
-                setTimeout(() => {
-                    submitButton.classList.remove("btn-loading");
-                    setError(true)}
-                , 1000);
+                handleError();
                 return;
             }
 

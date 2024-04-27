@@ -39,7 +39,6 @@ main {
 .btn-loading .btn-text{
   visibility: hidden;
   opacity: 0;
-
 }
 
 .btn-loading::after {
