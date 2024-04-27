@@ -110,7 +110,7 @@ export default function SignupForm() {
         {partialInput ? <p className='errorText'>Please fill required fields.</p> :<></>}
         {error ? <p className='errorText'>Something went wrong. Please try again.</p> :<></>}
         <div className='row d-flex justify-content-center' >
-            <button id="submit" className='btn btn-primary' type='submit' onClick={handleSubmit}>Submit</button>
+            <button id="submit" className='btn btn-primary btn-login-signup' type='submit' onClick={handleSubmit}>Submit</button>
         </div>
         <LoginToggle/>      
     </form>

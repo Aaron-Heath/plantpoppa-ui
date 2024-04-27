@@ -13,10 +13,21 @@ export default function LoginForm() {
     const [badLogin, setBadLogin] = useState(false);
     const [error, setError] = useState(false);
 
+    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const reqPath = import.meta.env.VITE_REACT_APP_AUTH_API + "/auth/basic";
 
+        setBadLogin(false);
+        setError(false);
+        
+        const submitButton = document.getElementById("login");
+        submitButton.classList.add("btn-loading");
+
+        const reqPath = import.meta.env.VITE_REACT_APP_AUTH_API + "/auth/basic";
+        let response;
+
+        
         // get data
         const payload = {
             email: document.getElementById("email").value,
@@ -24,7 +35,7 @@ export default function LoginForm() {
         }
         
         try {
-            const response = await fetch(reqPath,{
+            response = await fetch(reqPath,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -34,16 +45,46 @@ export default function LoginForm() {
             }
         );
 
-        if (response.status != 200) {
-            setBadLogin(true);
+        if (response.status == 404) {
+            setTimeout(() => {
+                submitButton.classList.remove("btn-loading");
+                setBadLogin(true)}
+            , 1000);
+            return;
         }
 
-        const data = await response.json();
-        Auth.login(data.jwt);
-        navigate('/app');
-            
+        try {
+
+            // Successful login
+            const data = await response.json();
+            Auth.login(data.jwt);
+            navigate('/app');
         } catch (error) {
             console.log(error);
+            submitButton.classList.toggle("btn-loading")
+        }
+
+            
+        } catch (error) {
+            // No response
+            if(!response) {
+                setTimeout(() => {
+                    submitButton.classList.remove("btn-loading");
+                    setError(true)}
+                , 1000);
+                return;
+            }
+
+            console.log(error);
+            if (response.status != 404) {
+                setTimeout(() => {
+                    submitButton.classList.remove("btn-loading");
+                    setError(true)}
+                , 1000);
+                return;
+            }
+
+
         }
 
 
@@ -74,7 +115,9 @@ export default function LoginForm() {
         {badLogin ? <p className='errorText'>Invalid username or password.</p> : <></>}
         {error ? <p className='errorText'>Something went wrong. Please try again.</p> : <></>}
         <div className='row d-flex justify-content-center' >
-            <button id="login" className='btn btn-primary' type='submit'>Login</button>
+            <button id="login" className='btn btn-primary btn-login-signup' type='submit'>
+                <span className='btn-text'>Login</span>
+                </button>
         </div>
         
         <LoginToggle pagePath={'/login'}/>
