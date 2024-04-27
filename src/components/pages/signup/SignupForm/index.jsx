@@ -3,29 +3,41 @@ import './style.css'
 
 import LoginToggle from '../../../LoginToggle'
 import { useNavigate } from 'react-router-dom'
+import { provideButtonLoadingToggle } from '../../../../utils/providers';
 
 export default function SignupForm() {
 
     const navigate = useNavigate();
     const [partialInput, setPartialInput] = useState(false);
     const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
+    const signupBtnId = "submit";
+    const loadingToggle = provideButtonLoadingToggle(signupBtnId);
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
+        loadingToggle(true);
         const reqPath = import.meta.env.VITE_REACT_APP_AUTH_API + "/api/user/register";
-
-        const signupData = {
-            firstname: document.getElementById("firstname"),
-            lastname: document.getElementById("lastname"),
-            email: document.getElementById("email"),
-            password: document.getElementById("password"),
+        
+        const payload = {
+            firstname: document.getElementById("firstname").value,
+            lastname: document.getElementById("lastname").value,
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value,
             phone: document.getElementById("phone").value,
             zip: document.getElementById("zip").value
         }
 
         // Checking for missing required inputs
-        console.log(isPartial());
-        if (isPartial()) return;
+        if (isPartial()) {
+            setTimeout(() => {
+                loadingToggle(false);
+            }, 500);
+
+            return;
+
+        }
 
         try {
             const response = await fetch(reqPath,{
@@ -33,15 +45,37 @@ export default function SignupForm() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(signupData),
+                body: JSON.stringify(payload),
                 redirect: "follow",
             });
+
+            if (response && response.status != 200) {
+                const data = await response.json();
+                setErrorMessage(data.message);
+                setError(true);
+                loadingToggle(false);
+                return;
+            }
     
             const data = await response.json();
-            navigate('/login');
+
         } catch (error) {
-            setError(true);
+            console.log(error)
+
+
+
+            setTimeout(() => {
+                loadingToggle(false);
+                setError(true);
+                setErrorMessage("Something went wrong. Please try again.")
+
+            }, 800);
+
+            return;
         }
+
+        // Redirect to /login if all is well
+        navigate('/login');
 
     } 
 
@@ -108,9 +142,10 @@ export default function SignupForm() {
             </div>
         </div>
         {partialInput ? <p className='errorText'>Please fill required fields.</p> :<></>}
-        {error ? <p className='errorText'>Something went wrong. Please try again.</p> :<></>}
+        {error ? <p className='errorText'>{errorMessage}</p> :<></>}
         <div className='row d-flex justify-content-center' >
-            <button id="submit" className='btn btn-primary btn-login-signup' type='submit' onClick={handleSubmit}>Submit</button>
+            <button id="submit" className='btn btn-primary btn-login-signup' type='submit' onClick={handleSubmit}>
+                <span className='btn-text'>Submit</span></button>
         </div>
         <LoginToggle/>      
     </form>

@@ -5,7 +5,7 @@ import Auth from '../../../../utils/auth'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './style.css'
-import { buttonLoadingToggle } from '../../../../utils/providers'
+import { provideButtonLoadingToggle } from '../../../../utils/providers'
 
 
 
@@ -17,7 +17,7 @@ export default function LoginForm() {
     const timeOutDelay = 800;
     const loginBtnId = "login";
 
-    const loadingToggle = buttonLoadingToggle(loginBtnId);
+    const loadingToggle = provideButtonLoadingToggle(loginBtnId);
 
     // Error handlers
     const handleError = () => {

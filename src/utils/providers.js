@@ -1,5 +1,5 @@
 
-export const buttonLoadingToggle = (btnId) => {
+export const provideButtonLoadingToggle = (btnId) => {
 
     return (isLoading) => {
         const loadingClass = "btn-loading";
