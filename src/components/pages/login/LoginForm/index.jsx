@@ -5,6 +5,7 @@ import Auth from '../../../../utils/auth'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './style.css'
+import { provideButtonLoadingToggle } from '../../../../utils/providers'
 
 
 
@@ -13,10 +14,40 @@ export default function LoginForm() {
     const [badLogin, setBadLogin] = useState(false);
     const [error, setError] = useState(false);
 
+    const timeOutDelay = 800;
+    const loginBtnId = "login";
+
+    const loadingToggle = provideButtonLoadingToggle(loginBtnId);
+
+    // Error handlers
+    const handleError = () => {
+
+        setTimeout(() => {
+            setError(true);
+            loadingToggle(false);
+        }, timeOutDelay);
+    }
+
+    const handleBadLogin = () => {
+
+        setTimeout(() => {
+            setBadLogin(true);
+            loadingToggle(false);
+        }, timeOutDelay);
+    }
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const reqPath = import.meta.env.VITE_REACT_APP_AUTH_API + "/auth/basic";
 
+        setBadLogin(false);
+        setError(false);
+        
+        loadingToggle(true);
+
+        const reqPath = import.meta.env.VITE_REACT_APP_AUTH_API + "/auth/basic";
+        let response;
+
+        
         // get data
         const payload = {
             email: document.getElementById("email").value,
@@ -24,7 +55,7 @@ export default function LoginForm() {
         }
         
         try {
-            const response = await fetch(reqPath,{
+            response = await fetch(reqPath,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -34,22 +65,35 @@ export default function LoginForm() {
             }
         );
 
-        if (response.status != 200) {
-            setBadLogin(true);
+        if (response.status == 404) {
+            handleBadLogin();
+            return;
         }
 
-        const data = await response.json();
-        Auth.login(data.jwt);
-        navigate('/app');
+        // Successful login
+        if(response.status === 200){
+            const data = await response.json();
+            Auth.login(data.jwt);
+            navigate('/app');
+            return;
+        } else {
+            throw new Error("Something went wrong.");
+        } 
+
             
         } catch (error) {
+            // No response
+            if(!response) {
+                handleError();
+                return;
+            }
+
             console.log(error);
+            if (response.status != 404) {
+                handleError();
+                return;
+            }
         }
-
-
-
-
-
     }
 
     const handleEdit = async (e) => {
@@ -74,9 +118,10 @@ export default function LoginForm() {
         {badLogin ? <p className='errorText'>Invalid username or password.</p> : <></>}
         {error ? <p className='errorText'>Something went wrong. Please try again.</p> : <></>}
         <div className='row d-flex justify-content-center' >
-            <button id="login" className='btn btn-primary' type='submit'>Login</button>
+            <button id="login" className='btn btn-primary btn-login-signup' type='submit'>
+                <span className='btn-text'>Login</span>
+                </button>
         </div>
-        
         <LoginToggle pagePath={'/login'}/>
     </form>
     </div>

@@ -21,6 +21,7 @@ main {
   --accentorange: #ff914d;
   --offwhite: #f5fbfdff;
   --button-radius: 8px;
+  --btn-txt-transition: all 0.2s;
 }
 .errorText {
   color: rgb(174, 23, 23);
@@ -32,6 +33,51 @@ main {
 
 .bold {
   font-weight: bold;
+}
+
+/* Loading Button Animations */
+.btn-loading .btn-text{
+  visibility: hidden;
+  opacity: 0;
+}
+
+.btn-loading::after {
+  content:"";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+
+  border: 4px solid transparent;
+  border-top-color: var(--accentgreen);
+  /* border-left-color: var(--accentgreen);
+  border-bottom-color: var(--accentgreen); */
+
+  border-radius: 50%;
+  animation: button-loading-spinner 1s ease infinite;
+}
+.btn-text {
+  transition: var(--btn-txt-transition);
+}
+
+@keyframes button-loading-spinner {
+  from {
+    transform: rotate(0turn);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+
+.btn-login-signup:active {
+  background-color: #1b6163 !important;
 }
 
 .large-font {
