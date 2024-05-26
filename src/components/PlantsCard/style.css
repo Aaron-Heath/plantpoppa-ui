@@ -1,0 +1,7 @@
+.plants-card {
+    background-color: var(--offwhite);
+    border: 2px red solid;
+
+    display: flex;
+    flex-direction: column;
+}

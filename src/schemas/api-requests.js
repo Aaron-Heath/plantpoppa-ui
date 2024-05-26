@@ -1,10 +1,14 @@
+import auth from "../utils/auth";
+
 const APP_JSON = "application/json";
 
 const PLANT_API = import.meta.env.VITE_REACT_APP_PLANT_API;
 
-export const GET_USER_PLANTS = async (jwt) => {
+export const GET_USER_PLANTS = async () => {
+    const jwt = auth.getToken();
     if(!jwt) {
-        throw new Error("Authentication not provided.");
+        auth.logout();
+        return;
     }
     
 
@@ -13,7 +17,6 @@ export const GET_USER_PLANTS = async (jwt) => {
         "Content-Type": APP_JSON,
         "AUTHORIZATION": "Bearer " + jwt
     }
-    console.log(headers);
 
     try {
         const response = await fetch(reqPath, {
@@ -22,13 +25,11 @@ export const GET_USER_PLANTS = async (jwt) => {
             redirect:"follow"
         });
 
-        console.log(response);
         let data;
         if(response.status == 200) {
             data = await response.json();
         }
 
-        console.log(data);
         return data;
 
     } catch (error) {
