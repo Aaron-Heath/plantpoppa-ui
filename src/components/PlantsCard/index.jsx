@@ -11,25 +11,11 @@ export default function index() {
     const {data, status} = useQuery("userPlants", GET_USER_PLANTS)
     console.log(data);
 
-
-
-
-
-    // useEffect(() => {
-    //     const jwt = auth.getToken();
-    //     if(!jwt) {
-    //         auth.logout();
-    //         return;
-    //     }
-    //     const userPlants = GET_USER_PLANTS(jwt);
-    //     // setPlantsList(userPlants);
-    // })
-
   return (
     <div className='plants-card'>
         <h2>My Plants</h2>
 
-            {data?.map((userPlant) => <PlantCardsItem {...userPlant}/>)}
+            {data?.map((userPlant) => <PlantCardsItem {...userPlant} key={userPlant.uuid}/>)}
 
         This is the plant card      
     </div>
