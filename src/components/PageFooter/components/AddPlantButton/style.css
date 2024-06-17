@@ -1,0 +1,10 @@
+#add-plant-btn {
+    border: var(--accentgreen) solid 4px;
+    background-color: var(--offwhite);
+    border-radius: 50%;
+    min-height: 125px;
+    min-width: 125px;
+    position: relative;
+
+    bottom: 40px;
+}
