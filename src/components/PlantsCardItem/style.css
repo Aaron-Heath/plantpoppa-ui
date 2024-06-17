@@ -1,0 +1,30 @@
+.plant-item {
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    border-bottom: grey 1px solid;
+}
+
+.plant-item:first-of-type {
+    border-top: grey 1px solid;
+}
+
+.plant-info {
+    /* border:blue 2px solid; */
+    display: flex;
+    flex: 3;
+    align-items: center;
+}
+
+.plant-namespace {
+    flex: 2;
+    text-align: left;
+}
+
+.quick-status {
+    flex:1;
+}
+
+.plant-actions {
+    flex: 1
+}
