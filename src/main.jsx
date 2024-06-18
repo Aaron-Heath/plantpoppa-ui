@@ -15,6 +15,7 @@ import Login from './components/pages/login'
 import Home from './components/pages/home'
 import SignupPage from './components/pages/signup'
 import AppHome from './components/pages/application/apphome/index.jsx'
+import NewPlant from './components/pages/application/newplant/index.jsx'
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: '/app',
         element: <AppHome/>
+      },
+      {
+        path:'/app/newplant',
+        element:<NewPlant/>
       }
     ]
   }

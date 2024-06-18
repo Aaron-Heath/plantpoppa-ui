@@ -13,6 +13,9 @@ export default function Home() {
   
   return (
     <div>
+      <div id="new-plant-modal" class="modal-dialog modal-sm">
+        TEST
+      </div>
 
       <div id="landing">
         <h1><span className='logo'>PlantPoppa</span></h1>
