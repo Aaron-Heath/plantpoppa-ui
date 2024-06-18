@@ -14,6 +14,11 @@ main {
   min-height: 100%;
 }
 
+main>div {
+  border: blue solid 1px;
+  width: 85%;
+}
+
 :root {
   --darkgreen: #124244;
   --lightgreen: #5c8689ff;
@@ -101,7 +106,7 @@ main {
 
 .signup-login-form {
   background-color: var(--offwhite);
-  max-width: 300px;
+  width: 100%;
   margin-top: 30px;
   padding: 30px;
   border-radius: 15px;

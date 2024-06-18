@@ -102,7 +102,7 @@ export default function LoginForm() {
     }
 
   return (
-    <div>
+    <>
           <form className='signup-login-form' onSubmit={handleSubmit}>
         <h2>Login</h2>
         <div className='row'>
@@ -124,6 +124,6 @@ export default function LoginForm() {
         </div>
         <LoginToggle pagePath={'/login'}/>
     </form>
-    </div>
+    </>
   )
 }

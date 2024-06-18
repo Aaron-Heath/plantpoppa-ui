@@ -15,7 +15,6 @@ export default function AppHome() {
 
   return (
     <div>
-      This is the app home.
       <PlantsCard/>
     </div>
   )

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useQuery } from 'react-query'
 import { GET_PLANTS } from '../../../../schemas/api-requests'
+import './style.css'
 
 export default function NewPlant() {
     const { data, isLoading, isError } = useQuery("plants", GET_PLANTS);
