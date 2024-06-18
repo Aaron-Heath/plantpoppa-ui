@@ -1,9 +1,16 @@
+import { useNavigate } from 'react-router-dom'
+import auth from '../../../utils/auth'
 import GetStartedButton from '../../GetStartedButton'
-import LandingHeader from '../../LandingHeader'
-import LandingFooter from '../../LandingFooter'
 import './home.css'
 
 export default function Home() {
+  const navigate = useNavigate();
+
+  if(auth.loggedIn()) {
+    navigate("/app")
+  }
+  
+  
   return (
     <div>
 
