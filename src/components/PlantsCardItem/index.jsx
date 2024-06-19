@@ -10,8 +10,10 @@ import readyPlantIcon from '../../images/planticons/plant-ready.png';
 import waterIcon from '../../images/quickactionicons/icons8-water-drop-96.png'
 import auth from '../../utils/auth'
 import { WATER_USER_PLANT } from '../../schemas/api-requests';
+import { useNavigate } from 'react-router-dom';
 
 export default function index({uuid, nickname, snooze, lastWatered, plant}) {
+    const navigate = useNavigate();
 
     const handleQuickWatering = (e) => {
         // TODO: Create/use SQL query to add watering to DB. Refresh this item
@@ -19,6 +21,20 @@ export default function index({uuid, nickname, snooze, lastWatered, plant}) {
 
         WATER_USER_PLANT(plantUuid);
                 
+    }
+
+    const handleClick = (e) => {
+        if(e.target.matches("#water-icon")) {
+            return;
+        }
+
+        console.log(e.currentTarget)
+        const target = e.currentTarget;
+
+        const plantUuid = target.dataset.id; 
+        console.log(plantUuid);
+
+        navigate("/app/myplants/" + plantUuid);
     }
 
 
@@ -51,7 +67,7 @@ export default function index({uuid, nickname, snooze, lastWatered, plant}) {
     
 
   return (
-    <div className='plant-item' key={uuid}>
+    <div className='plant-item' key={uuid} onClick={handleClick} data-id={uuid}>
         <div className='plant-info'>
             <div className='plant-namespace'>{nickname}</div>
             <div className='quick-status'>
@@ -60,7 +76,7 @@ export default function index({uuid, nickname, snooze, lastWatered, plant}) {
         </div>
         <div className='plant-actions'>
             <div>
-                <img src={waterIcon} height="50px" alt="quick-water-action" data-id={uuid} onClick={handleQuickWatering}/>
+                <img id="water-icon" src={waterIcon} height="50px" alt="quick-water-action" data-id={uuid} onClick={handleQuickWatering}/>
             </div>
             
         </div>

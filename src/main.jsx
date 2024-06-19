@@ -16,6 +16,7 @@ import Home from './components/pages/home'
 import SignupPage from './components/pages/signup'
 import AppHome from './components/pages/application/apphome/index.jsx'
 import NewPlant from './components/pages/application/newplant/index.jsx'
+import UserPlantPage from './components/pages/application/userplantpage/index.jsx'
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path:'/app/newplant',
         element:<NewPlant/>
+      },
+      {
+        path: '/app/myplants/:uuid',
+        element: <UserPlantPage/>
       }
     ]
   }
