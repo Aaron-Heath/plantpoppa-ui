@@ -4,6 +4,40 @@ const APP_JSON = "application/json";
 
 const PLANT_API = import.meta.env.VITE_REACT_APP_PLANT_API;
 
+export const ADD_USER_PLANT = async(requestBody) => {
+    const jwt = auth.getToken();
+    if(!jwt) {
+        auth.logout();
+        return;
+    }
+
+    const reqPath = PLANT_API + "/api/user-plant";
+    const headers = {
+        "AUTHORIZATION": "Bearer " + jwt,
+        "Content-Type": APP_JSON
+    }
+
+    try {
+        const response = await fetch(reqPath, {
+            method:"POST",
+            headers: headers,
+            redirect:"follow",
+            body: JSON.stringify(requestBody)
+        });
+
+        let data;
+        if(response.status == 200) {
+            data = await response.json();
+        }
+
+        return data;
+
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
 export const GET_PLANTS = async () => {
     const jwt = auth.getToken();
     if(!jwt) {

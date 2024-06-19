@@ -25,7 +25,11 @@ export default function index({uuid, nickname, snooze, lastWatered, plant}) {
     // if the snooze date exists and is newer than the lastwatered date plus plant.waterFrequency, use the snooze date, else use lastWatered
     const dayjsSnooze = snooze? dayjs(snooze): null;
     const dayjsLastWatered = lastWatered ? dayjs(lastWatered) : null;
-    const dayjsLastPlusFreq = dayjsLastWatered.add(plant.water_frequency,'day');
+    let dayjsLastPlusFreq;
+    if(dayjsLastWatered) {
+        dayjsLastPlusFreq = dayjsLastWatered?.add(plant.water_frequency,'day');
+    }
+    
 
 
     // If snooze exists and is after the last watered date plus the watering frequency, use snooze, else use last watered plus frequency

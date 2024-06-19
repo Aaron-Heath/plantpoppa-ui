@@ -4,6 +4,6 @@
  */
 export const filterByUuid = (uuid,array) => {
     return array.filter((entity) => {
-        entity.uuid === uuid;
+        return entity.uuid === uuid;
     });
 }
