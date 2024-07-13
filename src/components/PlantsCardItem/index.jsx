@@ -69,7 +69,7 @@ export default function index({uuid, nickname, snooze, lastWatered, plant}) {
   return (
     <div className='plant-item' key={uuid} onClick={handleClick} data-id={uuid}>
         <div className='plant-info'>
-            <div className='plant-namespace'>{nickname}</div>
+            <div className='plant-namespace'>{nickname || plant.common_name}</div>
             <div className='quick-status'>
                 <img src={plantIcon} alt="plant-status-icon" height="75px"/>
             </div>    
