@@ -124,6 +124,10 @@ main>div {
   color: grey;
 }
 
+.scroll {
+  overflow-y: scroll;
+}
+
 .btn-primary {
   background-color: var(--darkgreen) !important;
   color: var(--accentgreen) !important;
