@@ -44,7 +44,7 @@ export default function LoginForm() {
         
         loadingToggle(true);
 
-        const reqPath = import.meta.env.VITE_REACT_APP_AUTH_API + "/auth/basic";
+        const reqPath = import.meta.env.VITE_REACT_APP_AUTH_API + "/api/auth/login";
         let response;
 
         
@@ -73,7 +73,7 @@ export default function LoginForm() {
         // Successful login
         if(response.status === 200){
             const data = await response.json();
-            Auth.login(data.jwt);
+            Auth.login(data.token);
             navigate('/app');
             return;
         } else {
