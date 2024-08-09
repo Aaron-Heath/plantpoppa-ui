@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './style.css'
 import { provideButtonLoadingToggle } from '../../../../utils/providers'
+import { LOGIN } from '../../../../schemas/api-requests'
 
 
 
@@ -38,13 +39,9 @@ export default function LoginForm() {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         setBadLogin(false);
         setError(false);
-        
         loadingToggle(true);
-
-        const reqPath = import.meta.env.VITE_REACT_APP_AUTH_API + "/api/auth/login";
         let response;
 
         
@@ -55,17 +52,9 @@ export default function LoginForm() {
         }
         
         try {
-            response = await fetch(reqPath,{
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload),
-                redirect: "follow",
-            }
-        );
+        response = await LOGIN(payload);
 
-        if (response.status == 404) {
+        if (response.status == 401) {
             handleBadLogin();
             return;
         }

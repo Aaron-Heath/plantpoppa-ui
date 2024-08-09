@@ -2,7 +2,7 @@ import auth from "../utils/auth";
 
 const APP_JSON = "application/json";
 
-const PLANT_API = import.meta.env.VITE_REACT_APP_PLANT_API;
+const BACKEND_API = import.meta.env.VITE_REACT_APP_PLANT_API;
 
 export const ADD_USER_PLANT = async(requestBody) => {
     const jwt = auth.getToken();
@@ -11,7 +11,7 @@ export const ADD_USER_PLANT = async(requestBody) => {
         return;
     }
 
-    const reqPath = PLANT_API + "/api/user-plant";
+    const reqPath = BACKEND_API + "/api/user-plant";
     const headers = {
         "AUTHORIZATION": "Bearer " + jwt,
         "Content-Type": APP_JSON
@@ -45,7 +45,7 @@ export const GET_PLANTS = async () => {
         return;
     }
 
-    const reqPath = PLANT_API + "/api/plant/"
+    const reqPath = BACKEND_API + "/api/plant/"
 
     const headers = {
         "AUTHORIZATION": "Bearer " + jwt
@@ -78,7 +78,7 @@ export const GET_USER_PLANT = async (uuid) => {
         return;
     }
 
-    const reqPath = PLANT_API + "/api/user-plant/" + uuid;
+    const reqPath = BACKEND_API + "/api/user-plant/" + uuid;
     const headers = {
         "Content-Type": APP_JSON,
         "AUTHORIZATION": "Bearer " + jwt
@@ -113,7 +113,7 @@ export const GET_USER_PLANTS = async () => {
     }
     
 
-    const reqPath = PLANT_API + "/api/user-plant";
+    const reqPath = BACKEND_API + "/api/user-plant";
     const headers = {
         "Content-Type": APP_JSON,
         "AUTHORIZATION": "Bearer " + jwt
@@ -140,6 +140,29 @@ export const GET_USER_PLANTS = async () => {
 
 }
 
+export const LOGIN = async (payload) => {
+    let response;
+    const reqPath = BACKEND_API + "/api/auth/login";
+
+
+    try {
+        response = await fetch(reqPath, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload),
+            redirect: "follow"
+        });
+
+        return response;
+    } catch (error) {
+        throw error;
+        
+    }
+
+}
+
 export const WATER_USER_PLANT = async (plantUuid) => {
     const jwt = auth.getToken();
     if(!jwt) {
@@ -148,7 +171,7 @@ export const WATER_USER_PLANT = async (plantUuid) => {
     }
     
 
-    const reqPath = PLANT_API + "/api/user-plant/" + plantUuid + "/journal/water";
+    const reqPath = BACKEND_API + "/api/user-plant/" + plantUuid + "/journal/water";
     const headers = {
         "Content-Type": APP_JSON,
         "AUTHORIZATION": "Bearer " + jwt
