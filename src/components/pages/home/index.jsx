@@ -1,12 +1,18 @@
+import { useNavigate } from 'react-router-dom'
+import auth from '../../../utils/auth'
 import GetStartedButton from '../../GetStartedButton'
-import LandingHeader from '../../LandingHeader'
-import LandingFooter from '../../LandingFooter'
 import './home.css'
 
 export default function Home() {
+  const navigate = useNavigate();
+
+  if(auth.loggedIn()) {
+    navigate("/app")
+  }
+  
+  
   return (
     <div>
-
       <div id="landing">
         <h1><span className='logo'>PlantPoppa</span></h1>
         <h3>Your plant care co-parent</h3>

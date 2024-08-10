@@ -1,9 +1,10 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import './App.css'
 import PageHeader from './components/pageheader'
 import LandingHeader from './components/LandingHeader'
 import LandingFooter from './components/LandingFooter'
+import PageFooter from './components/PageFooter'
 
 function App() {
   // Responsiveness viewport height for mobile browsers
@@ -17,13 +18,16 @@ function App() {
 
 });
 
+const location = useLocation();
+
   return (
     <>
     <LandingHeader/>
       <main>
         <Outlet/>
       </main>
-    <LandingFooter/>
+      {location.pathname.startsWith("/app") ? <PageFooter/> : <LandingFooter/>}
+    
     </>
   )
 }

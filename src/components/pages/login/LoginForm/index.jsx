@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './style.css'
 import { provideButtonLoadingToggle } from '../../../../utils/providers'
+import { LOGIN } from '../../../../schemas/api-requests'
 
 
 
@@ -38,13 +39,9 @@ export default function LoginForm() {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         setBadLogin(false);
         setError(false);
-        
         loadingToggle(true);
-
-        const reqPath = import.meta.env.VITE_REACT_APP_AUTH_API + "/auth/basic";
         let response;
 
         
@@ -55,17 +52,9 @@ export default function LoginForm() {
         }
         
         try {
-            response = await fetch(reqPath,{
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload),
-                redirect: "follow",
-            }
-        );
+        response = await LOGIN(payload);
 
-        if (response.status == 404) {
+        if (response.status == 401) {
             handleBadLogin();
             return;
         }
@@ -73,7 +62,7 @@ export default function LoginForm() {
         // Successful login
         if(response.status === 200){
             const data = await response.json();
-            Auth.login(data.jwt);
+            Auth.login(data.token);
             navigate('/app');
             return;
         } else {
@@ -102,7 +91,7 @@ export default function LoginForm() {
     }
 
   return (
-    <div>
+    <>
           <form className='signup-login-form' onSubmit={handleSubmit}>
         <h2>Login</h2>
         <div className='row'>
@@ -124,6 +113,6 @@ export default function LoginForm() {
         </div>
         <LoginToggle pagePath={'/login'}/>
     </form>
-    </div>
+    </>
   )
 }

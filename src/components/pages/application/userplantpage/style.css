@@ -1,0 +1,20 @@
+
+
+h2.display-name {
+    margin-bottom: 0;
+}
+
+
+
+.card-row {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    text-align: left;
+    margin-bottom: 5px;
+    border: red dashed 2px;
+}
+
+.science-name {
+    text-align: left;
+}
