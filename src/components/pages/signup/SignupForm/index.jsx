@@ -4,6 +4,7 @@ import './style.css'
 import LoginToggle from '../../../LoginToggle'
 import { useNavigate } from 'react-router-dom'
 import { provideButtonLoadingToggle } from '../../../../utils/providers';
+import { REGISTER_USER } from '../../../../schemas/api-requests';
 
 export default function SignupForm() {
 
@@ -18,7 +19,6 @@ export default function SignupForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         loadingToggle(true);
-        const reqPath = import.meta.env.VITE_REACT_APP_AUTH_API + "/api/auth/register";
         
         const payload = {
             firstname: document.getElementById("firstname").value,
@@ -40,16 +40,9 @@ export default function SignupForm() {
         }
 
         try {
-            const response = await fetch(reqPath,{
-                method:"POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload),
-                redirect: "follow",
-            });
+            const response = await REGISTER_USER(payload); 
 
-            if (response && response.status != 200) {
+            if (response && response.status != 201) {
                 const data = await response.json();
                 setErrorMessage(data.message);
                 setError(true);
@@ -61,8 +54,6 @@ export default function SignupForm() {
 
         } catch (error) {
             console.log(error)
-
-
 
             setTimeout(() => {
                 loadingToggle(false);
@@ -76,7 +67,6 @@ export default function SignupForm() {
 
         // Redirect to /login if all is well
         navigate('/login');
-
     } 
 
     const handleEdit = (e) => {
@@ -101,8 +91,6 @@ export default function SignupForm() {
             } else {
                 element.classList.remove("missing");
             }
-
-
         }
         const partial = count > 0;
         if (partial) setPartialInput(true);

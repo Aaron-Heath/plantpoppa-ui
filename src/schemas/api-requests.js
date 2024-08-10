@@ -163,6 +163,28 @@ export const LOGIN = async (payload) => {
 
 }
 
+export const REGISTER_USER = async (payload) => {
+    let response;
+    const reqPath = BACKEND_API + "/api/auth/register";
+    
+    try {
+        response = await fetch(reqPath,{
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload),
+            redirect: "follow",
+        });
+
+        return response;
+        
+    } catch (error) {
+        throw error;
+    }
+    
+}
+
 export const WATER_USER_PLANT = async (plantUuid) => {
     const jwt = auth.getToken();
     if(!jwt) {
