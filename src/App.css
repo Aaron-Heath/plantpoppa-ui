@@ -15,7 +15,7 @@ main {
 }
 
 main>div {
-  border: blue solid 1px;
+  /* border: blue solid 1px; */
   width: 85%;
 }
 
