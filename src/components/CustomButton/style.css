@@ -1,10 +1,10 @@
-#login-btn {
-    padding: 4px 18px;
+.custom-button {
     border-radius: var(--button-radius);
+    box-shadow: var(--button-shadow);
+    padding: 4px 18px;
+}
 
+.button-accent {
     background-color: var(--accentgreen);
     color: var(--offwhite);
-    box-shadow: var(--button-shadow);
-
-    font-weight: bold;
 }
