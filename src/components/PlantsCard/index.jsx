@@ -16,8 +16,7 @@ export default function index() {
         <h2>My Plants</h2>
 
             {data?.map((userPlant) => <PlantCardsItem {...userPlant} key={userPlant.uuid}/>)}
-
-        This is the plant card      
+ 
     </div>
   )
 }

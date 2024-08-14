@@ -1,0 +1,35 @@
+.custom-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    z-index: 1;
+    padding: 15% 20px;
+
+    background-color: black;
+    background-color: rgba(0, 0, 0, .4);
+}
+
+.custom-modal-content {
+    width: 100%;
+
+}
+
+.custom-modal-title {
+    
+}
+
+#close-button {
+    position: fixed;
+    font-size: 20px;
+    padding: 0px 10px;
+    top: 20px;
+    right: 20px;
+
+}

@@ -2,7 +2,7 @@
     background-color: var(--lightgreen);
 
     display: flex;
-    justify-content: right !important;
-    padding: 15px 10px !important;
+    justify-content: space-between !important;
+    padding: 15px 35px !important;
     margin-bottom: 50px;
 }

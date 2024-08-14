@@ -1,0 +1,32 @@
+.plant-data {
+    margin: 10px 0;
+    text-align: start;
+}
+
+.custom-form-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    padding: 5px 5px;
+    height: 100%;
+    min-width: 100px;
+    background-color: var(--accentgreen);
+    color: var(--offwhite);
+    border-radius: var(--button-radius) 0 0 var(--button-radius);
+
+
+}
+
+.input-group {
+    margin: 5px 0px;
+}
+
+#plant-common-name {
+    margin: 0;
+}
+
+#plant-scientific-name {
+    margin-bottom: 8px;
+}

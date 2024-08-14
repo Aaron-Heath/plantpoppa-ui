@@ -1,0 +1,15 @@
+.custom-button {
+    border-radius: var(--button-radius);
+    box-shadow: var(--button-shadow);
+    padding: 4px 18px;
+}
+
+.button-accent {
+    background-color: var(--accentgreen);
+    color: var(--offwhite);
+}
+
+.button-orange {
+    background-color: var(--accentorange);
+    color: var(--offwhite)
+}
