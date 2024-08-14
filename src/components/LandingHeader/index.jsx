@@ -16,6 +16,10 @@ export default function LandingHeader() {
     navigate('/login');
   }
 
+  const handleHome = () => {
+    Auth.loggedIn() ? navigate('/app') : navigate('/')
+  }
+
   const buttonClassName = 'bold';
   const buttonColor = 'button-accent'; 
   // Button functions as login/logout depending on the Auth.loggedIn() status.
@@ -34,6 +38,7 @@ export default function LandingHeader() {
   }
   return (
     <header className='landing-header navbar'>
+        <p className='brand accent-orange clickable' onClick={handleHome}>PlantPoppa</p>
         <CustomButton {...buttonProps}/>
     </header>
   )

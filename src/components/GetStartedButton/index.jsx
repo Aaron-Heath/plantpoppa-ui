@@ -10,7 +10,7 @@ const handleClick = (e) => {
     return;
 }
   return (
-    <div className='get-started bold offwhite' onClick={handleClick}>
+    <div className='get-started bold offwhite clickable' onClick={handleClick}>
     Get started. It's FREE
     </div>
   )
