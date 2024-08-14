@@ -1,0 +1,14 @@
+.content-container {
+    background-color: var(--offwhite);
+    border-radius: 15px;
+    margin: 0;
+    padding: 20px 7px;
+    max-height: 500px;
+    overflow-y: scroll;
+
+    scrollbar-width: none;
+    
+
+    display: flex;
+    flex-direction: column;
+}

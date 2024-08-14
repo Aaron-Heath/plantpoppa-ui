@@ -40,10 +40,6 @@ const router = createBrowserRouter([
         element: <AppHome/>
       },
       {
-        path:'/app/newplant',
-        element:<NewPlant/>
-      },
-      {
         path: '/app/myplants/:uuid',
         element: <UserPlantPage/>
       }

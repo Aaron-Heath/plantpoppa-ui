@@ -16,18 +16,21 @@ export default function LandingHeader() {
     navigate('/login');
   }
 
-  const buttonClassName = 'custom-button button-accent bold'
+  const buttonClassName = 'bold';
+  const buttonColor = 'button-accent'; 
   // Button functions as login/logout depending on the Auth.loggedIn() status.
   const buttonProps = Auth.loggedIn()?
   {
     text: "Logout",
     onClick: handleLogoutClick,
-    className: buttonClassName
+    className: buttonClassName,
+    buttonColor: buttonColor
   } :
   {
     text:"Login",
     onClick: handleLoginClick,
-    className: buttonClassName
+    className: buttonClassName,
+    buttonColor: buttonColor
   }
   return (
     <header className='landing-header navbar'>
