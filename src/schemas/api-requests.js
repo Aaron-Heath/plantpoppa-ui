@@ -140,6 +140,29 @@ export const GET_USER_PLANTS = async () => {
 
 }
 
+export const GET_WATERINGS = async (plantUuid) => {
+    const jwt = auth.getToken();
+    if(!jwt) {
+        auth.logout();
+        return;
+    }
+    let response;
+
+    const reqPath = BACKEND_API + "/api/user-plant/" + plantUuid + "/journal";
+
+    try {
+        response = await fetch(reqPath, {
+            method:"GET",
+            headers:{"Content-Type": "application/json"},
+            redirect: "follow"
+        });
+
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
+
 export const LOGIN = async (payload) => {
     let response;
     const reqPath = BACKEND_API + "/api/auth/login";

@@ -23,7 +23,7 @@ export default function LandingHeader() {
   const buttonClassName = 'bold';
   const buttonColor = 'button-accent'; 
   // Button functions as login/logout depending on the Auth.loggedIn() status.
-  const buttonProps = Auth.loggedIn()?
+  const buttonProps = Auth.loggedIn() ?
   {
     text: "Logout",
     onClick: handleLogoutClick,

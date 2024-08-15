@@ -6,6 +6,8 @@ import { GET_PLANTS } from '../../../../schemas/api-requests';
 import { useNavigate } from 'react-router-dom';
 import CustomButton from '../../../CustomButton'
 import { ADD_USER_PLANT } from '../../../../schemas/api-requests';
+import PlantsInfoGrid from '../../../PlantsInfoGrid';
+import PlantInfoCard from '../../../PlantInfoCard';
 
 
 
@@ -71,13 +73,7 @@ export default function index({show, setShow}) {
     </div>
     {plant ? 
     <>
-    <div className='plant-data'>
-    <h4 id='plant-common-name'>{plant.common_name}</h4>
-    <p id='plant-scientific-name'><i>{plant.scientific_name}</i></p>
-    <p><b>Watering Info:</b> {plant.water_info}</p>
-    <p><b>Sunlight Info:</b> {plant.sunlight_info}</p>
-
-    </div> 
+    <PlantInfoCard plant={plant}/>
     <CustomButton {...buttonProps}/>
     </>
         : ""}

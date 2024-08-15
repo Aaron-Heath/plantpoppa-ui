@@ -27,6 +27,7 @@ main>div {
   --accentgreen: #61ae9a;
   --accentorange: #ff914d;
   --offwhite: #f5fbfdff;
+  --greenwhite: rgb(194, 215, 216);
   --button-radius: 8px;
   --btn-txt-transition: all 0.2s;
 }

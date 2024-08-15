@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './style.css'
 
 import { daysdiff } from '../../utils/dates';
@@ -9,12 +9,17 @@ import sadPlantIcon from '../../images/planticons/plant-sad.png';
 import readyPlantIcon from '../../images/planticons/plant-ready.png';
 import waterIcon from '../../images/quickactionicons/icons8-water-drop-96.png'
 import auth from '../../utils/auth'
-import { WATER_USER_PLANT } from '../../schemas/api-requests';
+import { GET_WATERINGS, WATER_USER_PLANT } from '../../schemas/api-requests';
 import { useNavigate } from 'react-router-dom';
+import CustomModal from '../CustomModal'
+import ContentContainer from '../ContentContainer'
+import PlantsInfoGrid from '../PlantsInfoGrid';
+import PlantInfoCard from '../PlantInfoCard';
 
 export default function index({uuid, nickname, snooze, lastWatered, plant}) {
     const navigate = useNavigate();
-
+    const [show, setShow] = useState(false);
+    
     const handleQuickWatering = (e) => {
         // TODO: Create/use SQL query to add watering to DB. Refresh this item
         const plantUuid = e.target.dataset.id;
@@ -23,7 +28,7 @@ export default function index({uuid, nickname, snooze, lastWatered, plant}) {
                 
     }
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         if(e.target.matches("#water-icon")) {
             return;
         }
@@ -33,8 +38,7 @@ export default function index({uuid, nickname, snooze, lastWatered, plant}) {
 
         const plantUuid = target.dataset.id; 
         console.log(plantUuid);
-
-        navigate("/app/myplants/" + plantUuid);
+        setShow(true);
     }
 
 
@@ -46,11 +50,8 @@ export default function index({uuid, nickname, snooze, lastWatered, plant}) {
         dayjsLastPlusFreq = dayjsLastWatered?.add(plant.water_frequency,'day');
     }
     
-
-
     // If snooze exists and is after the last watered date plus the watering frequency, use snooze, else use last watered plus frequency
     const dayjsNextWater = dayjsSnooze && dayjsSnooze.isAfter(dayjsLastPlusFreq) ? dayjsSnooze : dayjsLastPlusFreq;
-
     const today = dayjs();      
     
     // Determine which icon is needed
@@ -64,9 +65,35 @@ export default function index({uuid, nickname, snooze, lastWatered, plant}) {
     } else {
         plantIcon = readyPlantIcon;
     }
+
+    // ------ Modal Props ------ \\
+
+    const contentChildren = 
+    <>
+        <h2>{nickname || plant.common_name}</h2>
+        <div className='plant-data'>
+            <div className='quick-status'>
+                <img src={plantIcon} alt="plant-status-icon" height="75px"/>
+            </div>
+            <PlantInfoCard plant={plant}/>
+        </div>
+    </>
+
+    const modalChildren = 
+    <>
+    <ContentContainer children={contentChildren} classNames={["custom-modal-content"]}/>
+    </>
+
+    const modalProps = {
+        show: show,
+        setShow: setShow,
+        children: modalChildren
+    }
     
 
   return (
+    <>
+    <CustomModal {...modalProps}/>
     <div className='plant-item' key={uuid} onClick={handleClick} data-id={uuid}>
         <div className='plant-info'>
             <div className='plant-namespace'>{nickname || plant.common_name}</div>
@@ -81,5 +108,6 @@ export default function index({uuid, nickname, snooze, lastWatered, plant}) {
             
         </div>
     </div>
+    </>
   )
 }
