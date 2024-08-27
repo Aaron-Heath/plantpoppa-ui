@@ -60,6 +60,30 @@ export default function index({uuid, nickname, snooze, lastWatered, nextWatering
 
     // ------ Modal Props ------ \\
     const imgSize = "40px";
+    const waterSchedule = [];
+    for (let i = 0; i < 5; i ++) {
+        let dayjsLastWatered = dayjs(lastWatered);
+
+        if (i === 0) {
+            waterSchedule.push({
+                month: dayjsLastWatered.format("MMM"),
+                day: dayjsLastWatered.format("D"),
+                type: "past"
+            })
+        } else if (i === 1) {
+            waterSchedule.push({
+                month: dayjsNextWater.format("MMM"),
+                day: dayjsNextWater.format("D"),
+                type: "next"
+            });
+        } else {
+            let next = dayjsNextWater.add((i-1) * plant.water_frequency, "day")
+            waterSchedule.push({
+                month: next.format("MMM"),
+                day: next.format("D")
+            });
+        }
+    }
     const contentChildren = 
     <>
         <h2>{nickname || plant.common_name}</h2>
@@ -77,11 +101,19 @@ export default function index({uuid, nickname, snooze, lastWatered, nextWatering
                     <p>{dueStatement}</p>
                 </div>
             </div>
+            <p><b>Watering Schedule</b></p>
             <div className="waterings">
-                <p><b>Waterings</b></p>
-                {waterings.length < 1 ? "Not yet watered" :
-                waterings.map((watering) => {
-                   return (<p>{watering.wateringDate}</p>)
+
+                {waterSchedule.map((date) => {
+                    const className = date.type? "water-day " + date.type : "water-day"
+                    return <div className={className}> 
+                        <div>
+                            {date.month}
+                        </div>
+                        <div>
+                            {date.day}
+                        </div>
+                    </div>
                 })}
             </div>
         </div>

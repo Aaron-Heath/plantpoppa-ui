@@ -30,9 +30,12 @@
 }
 
 .waterings {
-    border: red 2px solid;
+    /* border: red 2px solid; */
     border-radius: var(--button-radius);
     background-color: var(--greenwhite);
+    display: flex;
+    justify-content: center;
+    padding: 5px;
 }
 
 .watering-badge {
@@ -56,6 +59,29 @@
 
 .badge-section {
     font-size: larger;
+}
+
+.water-day {
+    background-color: var(--offwhite);
+    border-radius: var(--button-radius);
+    border: 2px solid var(--darkgreen);
+    font-size: 20px;
+    margin: 2px 3px;
+    padding: 0 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.water-day.past {
+    border-style: dashed;    
+}
+
+.water-day.next {
+    background-color: var(--accentorange);
+    color: var(--darkgreen);
+    font-weight: bold;
 }
 
 .watering-badge:active {

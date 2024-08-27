@@ -18,7 +18,7 @@ export default function index() {
               let bName = b.nickname || b.plant.common_name;
               
               return aName.localeCompare(bName);
-              }).map((userPlant) => <PlantCardsItem {...userPlant} key={userPlant.uuid}/>)}
+              }).map((userPlant) => <PlantCardsItem {...userPlant} key={userPlant.uuid} userPlant={userPlant}/>)}
  
     </div>
   )
