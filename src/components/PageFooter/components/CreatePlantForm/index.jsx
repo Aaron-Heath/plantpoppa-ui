@@ -15,14 +15,12 @@ export default function index({show, setShow}) {
     const { data, isLoading, isError } = useQuery("plants", GET_PLANTS);
     const [plant, setPlant] = useState();
     const navigate = useNavigate();
-    console.log(data);
 
     const handleChange = async (e) => {
         const plantUuid = e.target.value;         
         await setPlant(data.find((plant) => {
             return plant.uuid === plantUuid;
         }));
-        console.log(plant);
     }
 
     const handleSubmit = async (e) => {

@@ -33,7 +33,6 @@ export const ADD_USER_PLANT = async(requestBody) => {
         return data;
 
     } catch (error) {
-        console.log(error);
     }
 
 }
@@ -66,7 +65,6 @@ export const GET_PLANTS = async () => {
         return data;
 
     } catch (error) {
-        console.log(error);
     }
 
 }
@@ -100,7 +98,6 @@ export const GET_USER_PLANT = async (uuid) => {
         return data;
 
     } catch (error) {
-        console.log(error);
     }
 
 }
@@ -134,7 +131,6 @@ export const GET_USER_PLANTS = async () => {
         return data;
 
     } catch (error) {
-        console.log(error);
     }
 
 
@@ -236,14 +232,12 @@ export const WATER_USER_PLANT = async (plantUuid) => {
         let data;
         if(response.status == 200) {
             data = await response.json();
-            console.log("plant watered");
         }
 
 
         return data;
 
     } catch (error) {
-        console.log(error);
     }
 
 }

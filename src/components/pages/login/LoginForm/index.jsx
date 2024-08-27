@@ -76,8 +76,6 @@ export default function LoginForm() {
                 handleError();
                 return;
             }
-
-            console.log(error);
             if (response.status != 404) {
                 handleError();
                 return;

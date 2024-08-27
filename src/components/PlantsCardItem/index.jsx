@@ -56,7 +56,6 @@ export default function index({uuid, nickname, snooze, lastWatered, nextWatering
     }
 
     const waterIn = today.diff(dayjsNextWater, "days") + 1;
-    console.log(`WaterIn: ${waterIn}`);
     const dueStatement = getPlantTaskDueStatement(dayjsNextWater);
 
     // ------ Modal Props ------ \\
@@ -69,8 +68,8 @@ export default function index({uuid, nickname, snooze, lastWatered, nextWatering
                 <img src={plantIcon} alt="plant-status-icon" height="75px"/>
             </div>
             <PlantInfoCard plant={plant}/>
-            <div className='watering-badge'>
-                <div className='badge-section'>
+            <div className='watering-badge' data-id={uuid} >
+                <div className='badge-logo'>
                     <img src={waterIcon2} height={imgSize} width={imgSize}/>
                     <b><p>water</p></b>
                 </div>

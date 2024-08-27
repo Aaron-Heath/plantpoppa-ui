@@ -45,8 +45,19 @@
     color: var(--offwhite);
     padding: 10px;
     margin: 10px 0;
+
+    transition: .15s;
+}
+
+.badge-section,
+.badge-logo {
+    margin: 0 10px;
 }
 
 .badge-section {
-    margin: 0 10px;
+    font-size: larger;
+}
+
+.watering-badge:active {
+    background-color: #0c79d3;
 }

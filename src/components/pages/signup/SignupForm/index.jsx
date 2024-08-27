@@ -53,7 +53,6 @@ export default function SignupForm() {
             const data = await response.json();
 
         } catch (error) {
-            console.log(error)
 
             setTimeout(() => {
                 loadingToggle(false);
