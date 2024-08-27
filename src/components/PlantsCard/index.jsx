@@ -6,9 +6,9 @@ import PlantCardsItem from '../PlantsCardItem'
 import './style.css';
 
 export default function index() {
-    // const [plantsList, setPlantsList] = useState([]);
-
     const {data, status} = useQuery("userPlants", GET_USER_PLANTS)
+
+    console.log(data);
 
   return (
     <div className='plants-card'>

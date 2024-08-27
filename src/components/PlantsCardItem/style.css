@@ -28,3 +28,25 @@
 .plant-actions {
     flex: 1
 }
+
+.waterings {
+    border: red 2px solid;
+    border-radius: var(--button-radius);
+    background-color: var(--greenwhite);
+}
+
+.watering-badge {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: start;
+    align-items: center;
+    background-color: #64b5f6;
+    border-radius: var(--button-radius);
+    color: var(--offwhite);
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.badge-section {
+    margin: 0 10px;
+}

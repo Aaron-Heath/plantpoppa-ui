@@ -3,7 +3,8 @@
     border-radius: 15px;
     margin: 0;
     padding: 20px 7px;
-    max-height: 500px;
+    min-height: 500px;
+    max-height: 750px;
     overflow-y: scroll;
 
     scrollbar-width: none;
