@@ -63,7 +63,9 @@ export default function index({uuid, nickname, snooze, lastWatered, nextWatering
     const waterSchedule = [];
     for (let i = 0; i < 5; i ++) {
         let dayjsLastWatered = dayjs(lastWatered);
-
+        if(!lastWatered) {
+            dayjsLastWatered = dayjs();
+        }
         if (i === 0) {
             waterSchedule.push({
                 month: dayjsLastWatered.format("MMM"),
