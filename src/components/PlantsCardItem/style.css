@@ -1,3 +1,13 @@
+.danger-zone {
+    margin-top: 8%;
+}
+
+.danger-button {
+    background-color: #b30202;
+    color: var(--offwhite)
+}
+
+
 .plant-item {
     display: flex;
     align-items: center;

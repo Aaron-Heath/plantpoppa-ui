@@ -37,6 +37,37 @@ export const ADD_USER_PLANT = async(requestBody) => {
 
 }
 
+export const DELETE_USER_PLANT = async (uuid) => {
+    const jwt = auth.getToken();
+    if(!jwt) {
+        auth.logout();
+        return;
+    }
+
+    const reqPath = BACKEND_API + "/api/user-plant/" + uuid;
+    const headers = {
+        "AUTHORIZATION": "Bearer " + jwt,
+        "Content-Type": APP_JSON
+    }
+
+    try {
+        const response = await fetch(reqPath, {
+            method:"DELETE",
+            headers: headers,
+            redirect:"follow",
+        });
+
+        let data;
+        if(response.status == 200) {
+            data = await response.json();
+        }
+
+        return data;
+
+    } catch (error) {
+    }
+}
+
 export const GET_PLANTS = async () => {
     const jwt = auth.getToken();
     if(!jwt) {

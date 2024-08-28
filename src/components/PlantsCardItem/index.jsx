@@ -10,12 +10,12 @@ import readyPlantIcon from '../../images/planticons/plant-ready.png';
 import waterIcon from '../../images/quickactionicons/icons8-water-drop-96.png';
 import waterIcon2 from '../../images/quickactionicons/icons8-water-100.png';
 import auth from '../../utils/auth'
-import { GET_WATERINGS, WATER_USER_PLANT } from '../../schemas/api-requests';
+import { DELETE_USER_PLANT, WATER_USER_PLANT } from '../../schemas/api-requests';
 import { useNavigate } from 'react-router-dom';
 import CustomModal from '../CustomModal'
 import ContentContainer from '../ContentContainer'
-import PlantsInfoGrid from '../PlantsInfoGrid';
 import PlantInfoCard from '../PlantInfoCard';
+import CustomButton from '../CustomButton'
 
 export default function index({uuid, nickname, snooze, lastWatered, nextWatering, plant, waterings}) {
     const navigate = useNavigate();
@@ -86,6 +86,26 @@ export default function index({uuid, nickname, snooze, lastWatered, nextWatering
             });
         }
     }
+    const handleDelete = async (e) => {
+        if(!e.target.matches(".danger-button")) {
+            return;
+        }
+
+        const DELETE = confirm("Are you sure you want to delete " + (nickname || plant.common_name) + "?");
+
+        if(DELETE) {
+            await DELETE_USER_PLANT(uuid);
+            alert("User Plant Deleted.");
+        }
+
+    }
+
+    const customButtonProps = {
+        type:"submit",
+        text: "Delete Plant",
+        onClick: handleDelete,
+        buttonColor: "danger-button"
+    }
     const contentChildren = 
     <>
         <h2>{nickname || plant.common_name}</h2>
@@ -117,6 +137,9 @@ export default function index({uuid, nickname, snooze, lastWatered, nextWatering
                         </div>
                     </div>
                 })}
+            </div>
+            <div className='danger-zone'>
+                <CustomButton {...customButtonProps}/>
             </div>
         </div>
     </>
