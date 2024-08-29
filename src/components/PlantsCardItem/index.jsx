@@ -24,8 +24,6 @@ export default function index({plant, userPlant}) {
 
     // Turn off edit mode if the modal is not showing
     if (!show && edit) setEdit(false);
-
-    console.log(`Edit: ${edit}`)
     
     const handleQuickWatering = (e) => {
         // TODO: Create/use SQL query to add watering to DB. Refresh this item
@@ -116,7 +114,6 @@ export default function index({plant, userPlant}) {
 
     const handleSave = async(e) => {
         if(!e.target.matches(".save-button")) return;
-        // console.log(e.target);
 
         const payload = {
             nickname: document.getElementById("nickname").value,
@@ -124,7 +121,6 @@ export default function index({plant, userPlant}) {
             plantUuid: editPlant.uuid
         }
         const data = await EDIT_USER_PLANT(userPlant.uuid, payload);
-        console.log(data);
         setEdit(false);
         setShow(false);
     }
