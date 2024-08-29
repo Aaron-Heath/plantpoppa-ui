@@ -1,5 +1,7 @@
 .danger-zone {
     margin-top: 8%;
+    display: flex;
+    justify-content: space-around;
 }
 
 .danger-button {
@@ -7,6 +9,15 @@
     color: var(--offwhite)
 }
 
+.edit-button {
+    background-color: var(--accentorange);
+    color: var(--offwhite)
+}
+
+.save-button {
+    background-color: var(--darkgreen);
+    color: var(--offwhite);
+}
 
 .plant-item {
     display: flex;

@@ -68,6 +68,41 @@ export const DELETE_USER_PLANT = async (uuid) => {
     }
 }
 
+export const EDIT_USER_PLANT = async (uuid, payload) => {
+    const jwt = auth.getToken();
+    if(!jwt) {
+        auth.logout();
+        return;
+    }
+
+    const reqPath = BACKEND_API + "/api/user-plant/" + uuid;
+    const headers = {
+        "AUTHORIZATION": "Bearer " + jwt,
+        "Content-Type": APP_JSON
+    }
+
+
+    try {
+        const response = await fetch(reqPath, {
+            method:"PATCH",
+            headers: headers,
+            redirect:"follow",
+            body: JSON.stringify(payload)
+        });
+
+        let data;
+        if(response.status == 200) {
+            data = await response.json();
+        }
+
+        return data;
+
+    } catch (error) {
+    }
+
+
+}
+
 export const GET_PLANTS = async () => {
     const jwt = auth.getToken();
     if(!jwt) {

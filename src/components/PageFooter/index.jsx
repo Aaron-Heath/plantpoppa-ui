@@ -46,8 +46,6 @@ const modalProps = {
     <div id="page-footer">
       <div className='testo' onClick={handleHomeClick}>Home</div>
       <div id="add-plant-btn" onClick={handleShow}>+</div>
-
-      {/* <AddPlantButton/> */}
       <div className='testo'>TEST</div>
     </div>
     </>

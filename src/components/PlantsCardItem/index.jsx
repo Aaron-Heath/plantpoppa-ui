@@ -9,17 +9,24 @@ import sadPlantIcon from '../../images/planticons/plant-sad.png';
 import readyPlantIcon from '../../images/planticons/plant-ready.png';
 import waterIcon from '../../images/quickactionicons/icons8-water-drop-96.png';
 import waterIcon2 from '../../images/quickactionicons/icons8-water-100.png';
-import auth from '../../utils/auth'
-import { DELETE_USER_PLANT, WATER_USER_PLANT } from '../../schemas/api-requests';
-import { useNavigate } from 'react-router-dom';
+import { DELETE_USER_PLANT, WATER_USER_PLANT, EDIT_USER_PLANT } from '../../schemas/api-requests';
 import CustomModal from '../CustomModal'
 import ContentContainer from '../ContentContainer'
 import PlantInfoCard from '../PlantInfoCard';
-import CustomButton from '../CustomButton'
+import CustomButton from '../CustomButton';
+import PlantNicknameTextInput from '../form-components/PlantNicknameTextInput';
+import PlantDropdown from '../form-components/PlantDropdown';
 
-export default function index({uuid, nickname, snooze, lastWatered, nextWatering, plant, waterings}) {
-    const navigate = useNavigate();
-    const [show, setShow] = useState(false);    
+export default function index({plant, userPlant}) {
+    const [show, setShow] = useState(false);
+    const [edit, setEdit] = useState(false);
+    const [editPlant, setEditPlant] = useState(plant);
+
+    // Turn off edit mode if the modal is not showing
+    if (!show && edit) setEdit(false);
+
+    console.log(`Edit: ${edit}`)
+    
     const handleQuickWatering = (e) => {
         // TODO: Create/use SQL query to add watering to DB. Refresh this item
         const plantUuid = e.target.dataset.id;
@@ -36,8 +43,8 @@ export default function index({uuid, nickname, snooze, lastWatered, nextWatering
     }
 
     // Sort in descending order (most recent first)
-    if(waterings.length > 1) {
-        waterings = waterings.sort((a,b) => {
+    if(userPlant.waterings.length > 1) {
+        userPlant.waterings = userPlant.waterings.sort((a,b) => {
             return (a.wateringDate > b.wateringDate? -1: 1); 
         })
     }
@@ -45,7 +52,7 @@ export default function index({uuid, nickname, snooze, lastWatered, nextWatering
     
     // Determine which icon is needed
     let plantIcon;
-    const dayjsNextWater = dayjs(nextWatering);
+    const dayjsNextWater = dayjs(userPlant.nextWatering);
     if(today.isBefore(dayjsNextWater)) {
         plantIcon = happyPlantIcon;
     } else if (today.diff(dayjsNextWater, "day") > 2) // If more than 2 days have passed since the recommended water date
@@ -62,8 +69,8 @@ export default function index({uuid, nickname, snooze, lastWatered, nextWatering
     const imgSize = "40px";
     const waterSchedule = [];
     for (let i = 0; i < 5; i ++) {
-        let dayjsLastWatered = dayjs(lastWatered);
-        if(!lastWatered) {
+        let dayjsLastWatered = dayjs(userPlant.lastWatered);
+        if(!userPlant.lastWatered) {
             dayjsLastWatered = dayjs();
         }
         if (i === 0) {
@@ -91,56 +98,113 @@ export default function index({uuid, nickname, snooze, lastWatered, nextWatering
             return;
         }
 
-        const DELETE = confirm("Are you sure you want to delete " + (nickname || plant.common_name) + "?");
+        const DELETE = confirm("Are you sure you want to delete " + (userPlant.nickname || plant.common_name) + "?");
 
         if(DELETE) {
-            await DELETE_USER_PLANT(uuid);
+            await DELETE_USER_PLANT(userPlant.uuid);
             alert("User Plant Deleted.");
         }
 
     }
 
-    const customButtonProps = {
+    const handleEdit = async(e) => {
+        if(!e.target.matches(".edit-button")) {
+            return;
+        }
+        setEdit(true);
+    }
+
+    const handleSave = async(e) => {
+        if(!e.target.matches(".save-button")) return;
+        // console.log(e.target);
+
+        const payload = {
+            nickname: document.getElementById("nickname").value,
+            userPlantUuid: userPlant.uuid,
+            plantUuid: editPlant.uuid
+        }
+        const data = await EDIT_USER_PLANT(userPlant.uuid, payload);
+        console.log(data);
+        setEdit(false);
+        setShow(false);
+    }
+
+    const deleteButtonProps = {
         type:"submit",
         text: "Delete Plant",
         onClick: handleDelete,
         buttonColor: "danger-button"
     }
+
+    const editButtonProps = {
+        type: "submit",
+        // Props change if edit if true/false. Allows quick toggle
+        text: edit? "Save ": "Edit Plant",
+        onClick: edit? handleSave : handleEdit,
+        buttonColor: edit? "save-button": "edit-button"
+    }
     const contentChildren = 
     <>
-        <h2>{nickname || plant.common_name}</h2>
-        <div className='plant-data'>
-            <div className='quick-status'>
-                <img src={plantIcon} alt="plant-status-icon" height="75px"/>
-            </div>
-            <PlantInfoCard plant={plant}/>
-            <div className='watering-badge' data-id={uuid} >
-                <div className='badge-logo'>
-                    <img src={waterIcon2} height={imgSize} width={imgSize}/>
-                    <b><p>water</p></b>
-                </div>
-                <div className='badge-section'>
-                    <p>{dueStatement}</p>
-                </div>
-            </div>
-            <p><b>Watering Schedule</b></p>
-            <div className="waterings">
+        <div className='plant-header'>
+            {
+                edit?
+                <>
+                <PlantNicknameTextInput value={userPlant.nickname || editPlant.common_name }/>
+                <PlantDropdown plant={editPlant} setPlant={setEditPlant}/>
 
-                {waterSchedule.map((date) => {
-                    const className = date.type? "water-day " + date.type : "water-day"
-                    return <div className={className}> 
-                        <div>
-                            {date.month}
-                        </div>
-                        <div>
-                            {date.day}
-                        </div>
+                </> : 
+        
+                <h2>{userPlant.nickname || plant.common_name}</h2> 
+            }
+            
+        </div>
+        <div className='plant-data'>
+            <>
+            {edit? 
+            <>
+            <PlantInfoCard plant={editPlant} value={editPlant.uuid} userPlant={userPlant}/>
+            </>
+            : 
+            <>
+                <div className='quick-status'>
+                    <img src={plantIcon} alt="plant-status-icon" height="75px"/>
+                </div>
+                <PlantInfoCard plant={plant}/>
+                <div className='watering-badge' data-id={userPlant.uuid} >
+                    <div className='badge-logo'>
+                        <img src={waterIcon2} height={imgSize} width={imgSize}/>
+                        <b><p>water</p></b>
                     </div>
-                })}
-            </div>
-            <div className='danger-zone'>
-                <CustomButton {...customButtonProps}/>
-            </div>
+                    <div className='badge-section'>
+                        <p>{dueStatement}</p>
+                    </div>
+                </div>
+                <p><b>Watering Schedule</b></p>
+                <div className="waterings">
+
+                    {waterSchedule.map((date) => {
+                        const className = date.type? "water-day " + date.type : "water-day"
+                        return <div className={className}> 
+                            <div>
+                                {date.month}
+                            </div>
+                            <div>
+                                {date.day}
+                            </div>
+                        </div>
+                    })}
+                </div>
+
+            
+            </>
+            
+            
+            }
+                <div className='danger-zone'>
+                    <CustomButton {...deleteButtonProps}/>
+                    <CustomButton {...editButtonProps}/>
+                </div>
+            </>
         </div>
     </>
 
@@ -159,16 +223,16 @@ export default function index({uuid, nickname, snooze, lastWatered, nextWatering
   return (
     <>
     <CustomModal {...modalProps}/>
-    <div className='plant-item' key={uuid} onClick={handleClick} data-id={uuid}>
+    <div className='plant-item' key={userPlant.uuid} onClick={handleClick} data-id={userPlant.uuid}>
         <div className='plant-info'>
-            <div className='plant-namespace'>{nickname || plant.common_name}</div>
+            <div className='plant-namespace'>{userPlant.nickname || plant.common_name}</div>
             <div className='quick-status'>
                 <img src={plantIcon} alt="plant-status-icon" height="75px"/>
             </div>    
         </div>
         <div className='plant-actions'>
             <div>
-                <img id="water-icon" src={waterIcon} height="50px" alt="quick-water-action" data-id={uuid} onClick={handleQuickWatering}/>
+                <img id="water-icon" src={waterIcon} height="50px" alt="quick-water-action" data-id={userPlant.uuid} onClick={handleQuickWatering}/>
             </div>
             
         </div>
