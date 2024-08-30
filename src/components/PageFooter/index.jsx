@@ -6,6 +6,8 @@ import { Modal, Button } from 'bootstrap';
 import CustomModal from '../CustomModal';
 import ContentContainer from '../ContentContainer';
 import CreatePlantForm from './components/CreatePlantForm'
+import HomeImg from '../../images/quickactionicons/icons8-home-50.png'
+import HamburgerImg from '../../images/quickactionicons/icons8-hamburger-menu-50.png'
 
 export default function PageFooter() {
 const navigate = useNavigate();
@@ -44,9 +46,13 @@ const modalProps = {
     <>
     <CustomModal {...modalProps}/>
     <div id="page-footer">
-      <div className='testo' onClick={handleHomeClick}>Home</div>
+      <div className='nav-icon' onClick={handleHomeClick}>
+        <img src={HomeImg} height="40px" width="40px"/>
+      </div>
       <div id="add-plant-btn" onClick={handleShow}>+</div>
-      <div className='testo'>TEST</div>
+      <div className='nav-icon'>
+        <img src={HamburgerImg} height="40px" width="40px"/>
+      </div>
     </div>
     </>
   )
