@@ -1,14 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './style.css'
 
 import LoginToggle from '../../../LoginToggle'
 import { useNavigate } from 'react-router-dom'
 import { provideButtonLoadingToggle } from '../../../../utils/providers';
 import { REGISTER_USER } from '../../../../schemas/api-requests';
+import Auth from '../../../../utils/auth';
 
 export default function SignupForm() {
 
     const navigate = useNavigate();
+    useEffect(() => {
+        if(Auth.loggedIn()) navigate('/app');
+    });
+
     const [partialInput, setPartialInput] = useState(false);
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
