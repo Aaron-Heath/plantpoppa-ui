@@ -33,6 +33,7 @@ export const ADD_USER_PLANT = async(requestBody) => {
         return data;
 
     } catch (error) {
+        
     }
 
 }
@@ -192,11 +193,20 @@ export const GET_USER_PLANTS = async () => {
         let data;
         if(response.status == 200) {
             data = await response.json();
+            return data;
         }
 
-        return data;
+        data = await response.json();
+
+        // Logs you out if the server determines the credentials are invalid.
+        if(response.status === 401 && data.message.toLowerCase() === "invalid user credentials.") {
+            auth.logout();
+        }
+        
 
     } catch (error) {
+        const response = await error.json();
+        console.log(response);
     }
 
 

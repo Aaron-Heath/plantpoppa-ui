@@ -17,13 +17,12 @@ main {
 }
 
 main>div {
-  /* border: blue solid 1px; */
   width: 85%;
 }
 
 :root {
   --darkgreen: #124244;
-  --lightgreen: #5c8689ff;
+  --lightgreen: #5c8689;
   --accentgreen: #61ae9a;
   --accentorange: #ff914d;
   --offwhite: #f5fbfdff;

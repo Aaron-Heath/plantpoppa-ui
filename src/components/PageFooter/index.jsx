@@ -24,6 +24,10 @@ const handleHomeClick = () => {
   navigate('/app');
 }
 
+const handleSettingsClick = () => {
+  navigate('/app/settings')
+}
+
 
 // Modal Properties
 const plantFormProps = {
@@ -50,7 +54,7 @@ const modalProps = {
         <img src={HomeImg} height="40px" width="40px"/>
       </div>
       <div id="add-plant-btn" onClick={handleShow}>+</div>
-      <div className='nav-icon'>
+      <div className='nav-icon' onClick={handleSettingsClick}>
         <img src={HamburgerImg} height="40px" width="40px"/>
       </div>
     </div>

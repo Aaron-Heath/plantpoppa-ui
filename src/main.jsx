@@ -16,6 +16,7 @@ import Home from './components/pages/home'
 import SignupPage from './components/pages/signup'
 import AppHome from './components/pages/application/apphome/index.jsx'
 import UserPlantPage from './components/pages/application/userplantpage/index.jsx'
+import SettingsPage from './components/pages/application/settings/index.jsx'
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: '/app/myplants/:uuid',
         element: <UserPlantPage/>
+      },
+      {
+        path: '/app/settings',
+        element: <SettingsPage/>
       }
     ]
   }
@@ -54,6 +59,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router}/>
     </QueryClientProvider>
-    {/* <App /> */}
   </React.StrictMode>,
 )
