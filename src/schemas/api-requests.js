@@ -235,6 +235,45 @@ export const GET_WATERINGS = async (plantUuid) => {
     }
 }
 
+export const WATER_USER_PLANT = async (plantUuid) => {
+    const jwt = auth.getToken();
+    if(!jwt) {
+        auth.logout();
+        return;
+    }
+    
+
+    const reqPath = BACKEND_API + "/api/user-plant/" + plantUuid + "/journal/water";
+    const headers = {
+        "Content-Type": APP_JSON,
+        "AUTHORIZATION": "Bearer " + jwt
+    }
+    const body = {
+        "entityUuid": plantUuid
+    }
+
+    try {
+        const response = await fetch(reqPath, {
+            method:"POST",
+            headers: headers,
+            redirect:"follow",
+            body: JSON.stringify(body)
+        });
+
+        let data;
+        if(response.status == 200) {
+            data = await response.json();
+        }
+
+
+        return data;
+
+    } catch (error) {
+    }
+
+}
+
+// --- USER API REQUESTS --- \\
 export const LOGIN = async (payload) => {
     let response;
     const reqPath = BACKEND_API + "/api/auth/login";
@@ -280,40 +319,30 @@ export const REGISTER_USER = async (payload) => {
     
 }
 
-export const WATER_USER_PLANT = async (plantUuid) => {
+
+
+export const ME = async() => {
     const jwt = auth.getToken();
     if(!jwt) {
         auth.logout();
         return;
     }
-    
 
-    const reqPath = BACKEND_API + "/api/user-plant/" + plantUuid + "/journal/water";
+    const reqPath = BACKEND_API + "/api/user/me";
     const headers = {
         "Content-Type": APP_JSON,
         "AUTHORIZATION": "Bearer " + jwt
     }
-    const body = {
-        "entityUuid": plantUuid
-    }
 
-    try {
-        const response = await fetch(reqPath, {
-            method:"POST",
-            headers: headers,
-            redirect:"follow",
-            body: JSON.stringify(body)
-        });
+    const response = await fetch(reqPath, {
+        method:"GET",
+        headers: headers,
+        redirect:"follow"
+    });
 
-        let data;
-        if(response.status == 200) {
-            data = await response.json();
-        }
-
-
+    let data;
+    if(response.status == 200) {
+        data = await response.json();
         return data;
-
-    } catch (error) {
     }
-
 }

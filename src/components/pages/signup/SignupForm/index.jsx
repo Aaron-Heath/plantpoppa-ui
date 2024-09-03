@@ -20,18 +20,27 @@ export default function SignupForm() {
 
     const signupBtnId = "submit";
     const loadingToggle = provideButtonLoadingToggle(signupBtnId);
+
+    const FORM_FIELDS = {
+        FIRST_NAME: "firstName",
+        LAST_NAME: "lastName",
+        EMAIL: "email",
+        PASSWORD: "password",
+        PHONE: "phone",
+        ZIP: "zip"
+    }
     
     const handleSubmit = async (e) => {
         e.preventDefault();
         loadingToggle(true);
         
         const payload = {
-            firstname: document.getElementById("firstname").value,
-            lastname: document.getElementById("lastname").value,
-            email: document.getElementById("email").value,
-            password: document.getElementById("password").value,
-            phone: document.getElementById("phone").value,
-            zip: document.getElementById("zip").value
+            firstName: document.getElementById(FORM_FIELDS.FIRST_NAME).value,
+            lastName: document.getElementById(FORM_FIELDS.LAST_NAME).value,
+            email: document.getElementById(FORM_FIELDS.EMAIL).value,
+            password: document.getElementById(FORM_FIELDS.PASSWORD).value,
+            phone: document.getElementById(FORM_FIELDS.PHONE).value,
+            zip: document.getElementById(FORM_FIELDS.ZIP).value
         }
 
         // Checking for missing required inputs
@@ -81,10 +90,10 @@ export default function SignupForm() {
     const isPartial = () => {
         let count = 0;
         const requiredElements = {
-            firstname: document.getElementById("firstname"),
-            lastname: document.getElementById("lastname"),
-            email: document.getElementById("email"),
-            password: document.getElementById("password"),
+            firstname: document.getElementById(FORM_FIELDS.FIRST_NAME),
+            lastname: document.getElementById(FORM_FIELDS.LAST_NAME),
+            email: document.getElementById(FORM_FIELDS.EMAIL),
+            password: document.getElementById(FORM_FIELDS.LAST_NAME),
         }
 
         for (let key in requiredElements) {
@@ -106,31 +115,31 @@ export default function SignupForm() {
         <h2>Sign Up</h2>
         <div className='row'>
             <div className='col'>
-                <input type="text" onChange={handleEdit} className='form-control' placeholder="First Name" id="firstname" required/>
+                <input type="text" onChange={handleEdit} className='form-control' placeholder="First Name" id={FORM_FIELDS.FIRST_NAME} required/>
             </div>
             <div className='col'>
-                <input type="text" onChange={handleEdit} className='form-control' placeholder="Last Name" id="lastname" required/>
-            </div>
-        </div>
-        <div className='row'>
-            <div className='col'>
-                <input type="text" onChange={handleEdit} className='form-control' placeholder="Email" id="email" required/>
+                <input type="text" onChange={handleEdit} className='form-control' placeholder="Last Name" id={FORM_FIELDS.LAST_NAME} required/>
             </div>
         </div>
         <div className='row'>
             <div className='col'>
-                <input type="text" onChange={handleEdit} className='form-control' placeholder="Phone" id="phone"/>
+                <input type="text" onChange={handleEdit} className='form-control' placeholder="Email" id={FORM_FIELDS.EMAIL} required/>
             </div>
         </div>
         <div className='row'>
             <div className='col'>
-                <input type="text" onChange={handleEdit} id="zip" className='form-control' placeholder="ZIP Code*" />
+                <input type="text" onChange={handleEdit} className='form-control' placeholder="Phone" id={FORM_FIELDS.PHONE}/>
+            </div>
+        </div>
+        <div className='row'>
+            <div className='col'>
+                <input type="text" onChange={handleEdit} id={FORM_FIELDS.ZIP} className='form-control' placeholder="ZIP Code*" />
                 <label className='form-caption' htmlFor="zip">*ZIP code is only used for plant data.</label>
             </div>
         </div>
         <div className='row'>
             <div className='col'>
-                <input type="password" onChange={handleEdit} className='form-control' placeholder="Password" id="password" required/>
+                <input type="password" onChange={handleEdit} className='form-control' placeholder="Password" id={FORM_FIELDS.PASSWORD} required/>
             </div>
         </div>
         {partialInput ? <p className='errorText'>Please fill required fields.</p> :<></>}
