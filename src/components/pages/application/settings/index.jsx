@@ -52,10 +52,8 @@ export default function settings() {
         setEditMode(false);
         return;
       }
-      console.log(payload)
       const responseData = await EDIT_ME(payload);
 
-      console.log(responseData);
 
 
 
@@ -67,9 +65,15 @@ export default function settings() {
       const confirmation = confirm("Are you sure you want to delete your account? THIS ACTION CANNOT BE UNDONE.")
       if (!confirmation) return;
       
-      const responseData = await DELETE_ME();
-      Auth.logout();
-      navigate("/login");
+      try {
+        const responseData = await DELETE_ME();
+        Auth.logout();
+        navigate("/login");
+      } catch (error) {
+        console.log(error);
+      }
+
+
       
     }
 
@@ -99,7 +103,7 @@ export default function settings() {
 
       </>
     :
-    <TextInput id="fullName" inputName={"Name"} defaultValue={user.firstname + " " + data.lastname} disabled={!editMode}/>
+    <TextInput id="fullName" inputName={"Name"} defaultValue={user.firstname + " " + user.lastname} disabled={!editMode}/>
     }
       <TextInput id="phone" inputName={"Phone"} defaultValue={user.phone} disabled={!editMode}/>
       <TextInput id="zip" inputName={"Zip"} defaultValue={user.zip} disabled={!editMode}/>

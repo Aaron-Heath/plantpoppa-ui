@@ -206,7 +206,6 @@ export const GET_USER_PLANTS = async () => {
 
     } catch (error) {
         const response = await error.json();
-        console.log(response);
     }
 
 
@@ -398,4 +397,8 @@ export const DELETE_ME = async() => {
         data = await response.json();
         return data;
     }
+
+    alert("Something went wrong processesing your request. Please try again.");
+
+    throw new Error("User delete failed.");
 }

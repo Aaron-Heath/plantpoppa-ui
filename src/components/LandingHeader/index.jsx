@@ -24,8 +24,6 @@ export default function LandingHeader() {
     navigate('/')
   }
 
-  console.log(window.location)
-
   const buttonClassName = 'bold';
   const buttonColor = 'button-accent'; 
   // Button functions as login/logout depending on the Auth.loggedIn() status.
