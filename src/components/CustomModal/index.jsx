@@ -6,7 +6,6 @@ export default function index({children, show, setShow}) {
 
   const handleClose = (e) => {
     if(e.target.matches(".custom-modal") || e.target.matches("#close-button")) {
-      console.log(e.target)
       setShow(false);
     }
 

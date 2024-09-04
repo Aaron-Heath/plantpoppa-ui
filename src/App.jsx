@@ -1,7 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import './App.css'
-import PageHeader from './components/pageheader'
 import LandingHeader from './components/LandingHeader'
 import LandingFooter from './components/LandingFooter'
 import PageFooter from './components/PageFooter'

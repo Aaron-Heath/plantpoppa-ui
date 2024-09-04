@@ -9,6 +9,25 @@
 
     display: flex;
     justify-content: space-around;
+    align-items: center;
 
     background-color: var(--lightgreen);
+}
+
+.nav-icon {
+    border: 2px var(--accentgreen) solid;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    width: 70px;
+
+    background-color: var(--offwhite);
+    transition-duration: .2s;
+
+}
+
+.nav-icon:active {
+    transform: scale(.9);
 }

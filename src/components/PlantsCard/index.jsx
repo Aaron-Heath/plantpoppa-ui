@@ -6,16 +6,19 @@ import PlantCardsItem from '../PlantsCardItem'
 import './style.css';
 
 export default function index() {
-    // const [plantsList, setPlantsList] = useState([]);
-
     const {data, status} = useQuery("userPlants", GET_USER_PLANTS)
-    console.log(data);
+
 
   return (
     <div className='plants-card'>
         <h2>My Plants</h2>
-
-            {data?.map((userPlant) => <PlantCardsItem {...userPlant} key={userPlant.uuid}/>)}
+            {/* Sort data by nickname and common_name*/}
+            {data?.sort((a, b) => {
+              let aName = a.nickname || a.plant.common_name;
+              let bName = b.nickname || b.plant.common_name;
+              
+              return aName.localeCompare(bName);
+              }).map((userPlant) => <PlantCardsItem {...userPlant} key={userPlant.uuid} userPlant={userPlant}/>)}
  
     </div>
   )

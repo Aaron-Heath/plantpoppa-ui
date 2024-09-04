@@ -17,6 +17,17 @@ class Auth {
         return localStorage.getItem(this.idTokenStore);
     }
 
+    getValidTokenElseLogout() {
+        const token = localStorage.getItem(this.idTokenStore);
+        if(!token || this.isTokenExpired(token)) {
+            this.logout();
+
+            return null;
+        }
+
+        return token;
+    }
+
 
     login(idToken) {
         localStorage.setItem(this.idTokenStore, idToken);

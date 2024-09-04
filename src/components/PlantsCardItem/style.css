@@ -1,3 +1,24 @@
+.danger-zone {
+    margin-top: 8%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.danger-button {
+    background-color: #b30202;
+    color: var(--offwhite)
+}
+
+.edit-button {
+    background-color: var(--accentorange);
+    color: var(--offwhite)
+}
+
+.save-button {
+    background-color: var(--darkgreen);
+    color: var(--offwhite);
+}
+
 .plant-item {
     display: flex;
     align-items: center;
@@ -27,4 +48,63 @@
 
 .plant-actions {
     flex: 1
+}
+
+.waterings {
+    /* border: red 2px solid; */
+    border-radius: var(--button-radius);
+    background-color: var(--greenwhite);
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+.watering-badge {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: start;
+    align-items: center;
+    background-color: #64b5f6;
+    border-radius: var(--button-radius);
+    color: var(--offwhite);
+    padding: 10px;
+    margin: 10px 0;
+
+    transition: .15s;
+}
+
+.badge-section,
+.badge-logo {
+    margin: 0 10px;
+}
+
+.badge-section {
+    font-size: larger;
+}
+
+.water-day {
+    background-color: var(--offwhite);
+    border-radius: var(--button-radius);
+    border: 2px solid var(--darkgreen);
+    font-size: 20px;
+    margin: 2px 3px;
+    padding: 0 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.water-day.past {
+    border-style: dashed;    
+}
+
+.water-day.next {
+    background-color: var(--accentorange);
+    color: var(--darkgreen);
+    font-weight: bold;
+}
+
+.watering-badge:active {
+    background-color: #0c79d3;
 }

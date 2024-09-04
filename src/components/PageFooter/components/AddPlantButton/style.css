@@ -14,24 +14,8 @@
     font-size: 75px;
     padding: 0;
 
-    bottom: 40px;
+    bottom: 10px;
 }
-
-#add-plant-btn .open {
-    
-}
-
-/* #add-plant-btn::before {
-    content: "+"; */
-    /* border: red 1px solid; */
-    /* color: var(--accentgreen);
-    font-size: 75px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    margin: 0; */
-/* } */
 
 #add-plant-btn:active {
     transform: scale(0.9);
