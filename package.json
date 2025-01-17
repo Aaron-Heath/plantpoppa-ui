@@ -18,12 +18,14 @@
     }
   },
   "dependencies": {
+    "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "concurrently": "^8.2.2",
     "dayjs": "^1.11.11",
     "formik": "^2.4.6",
     "jwt-decode": "^4.0.0",
+    "postcss": "^8.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",

@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { useQuery } from 'react-query';
-import { GET_USER_PLANTS } from '../../schemas/api-requests';
-import auth from '../../utils/auth';
+import React from 'react'
 import PlantCardsItem from '../PlantsCardItem'
 import './style.css';
 import useGetUserPlants from '../../plants/hooks/queries/useGetPlants';
@@ -13,8 +10,8 @@ export default function index() {
 
 
   return (
-    <div className='plants-card'>
-        <h2>My Plants</h2>
+    <div className='plants-card overflow-y-scroll md:w-4/6'>
+        <h2 className='py-2 bold text-2xl'>My Plants</h2>
         {
           userPlantsQuery.isLoading? <h2>Loading...</h2> :
           data?.sort((a, b) => {

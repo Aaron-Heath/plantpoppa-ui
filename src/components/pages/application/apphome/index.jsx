@@ -14,7 +14,7 @@ export default function AppHome() {
 
 
   return (
-    <div>
+    <div className='flex justify-center'>
       <PlantsCard/>
     </div>
   )
