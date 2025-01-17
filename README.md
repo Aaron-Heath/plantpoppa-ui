@@ -4,7 +4,7 @@ PlantPoppa is a plant care tracker build on a **React** frontend and **Spring** 
 
 # Application Pages
 * [PlantPoppa UI](https://github.com/Aaron-Heath/plantpoppa-ui) - **You are here**
-* [PlantPoppa Auth Service](https://github.com/Aaron-Heath/plantpoppa-auth)
+* [PlantPoppa Backend Service](https://github.com/Aaron-Heath/plantpoppa-auth)
 
 # Technology Stack
 * Front End: React Vite frontend deployed using Netlify
