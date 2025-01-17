@@ -82,9 +82,17 @@ export default function LoginForm() {
         {loginMutation.isError && loginMutation.error.status === 401 ? <p className='errorText'>Invalid username or password.</p> : <></>}
         {loginMutation.isError && loginMutation.error.status > 401 ? <p className='errorText'>Something went wrong. Please try again.</p> : <></>}
         <div className='row d-flex justify-content-center' >
+            {
+                loginMutation.isLoading? 
+            <button id="login" className='btn btn-primary btn-login-signup btn-loading' type='submit'>
+                <span className='btn-text'>Login</span>
+            </button>
+                :
             <button id="login" className='btn btn-primary btn-login-signup' type='submit'>
                 <span className='btn-text'>Login</span>
             </button>
+            }
+
         </div>
         <LoginToggle pagePath={'/login'}/>
     </form>
