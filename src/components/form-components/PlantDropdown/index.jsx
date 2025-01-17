@@ -2,15 +2,18 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { GET_PLANTS } from '../../../schemas/api-requests'
 
-export default function index({plant, setPlant, value}) {
+export default function index({plant, setPlant, value, formik}) {
     const {data, isLoading, isError} = useQuery("plants", GET_PLANTS);
 
 
     const handleChange = async (e) => {
         const plantUuid = e.target.value;         
-        await setPlant(data.find((plant) => {
-            return plant.uuid === plantUuid;
-        }));
+        await setPlant(() => {
+            const plant = data.find((plant) =>plant.uuid === plantUuid);
+            formik.setFieldValue("plant", plant)
+            formik.setFieldValue("plantUuid", plantUuid)
+            return plant;
+        });
     }
 
   return (
