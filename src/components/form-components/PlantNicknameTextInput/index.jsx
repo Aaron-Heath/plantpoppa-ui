@@ -1,5 +1,4 @@
 import React from 'react'
-
 export default function PlantNicknameTextInput({value}) {
   return (
     <div className='input-group'>

@@ -9,31 +9,32 @@ import { ADD_USER_PLANT } from '../../../../schemas/api-requests';
 import PlantsInfoGrid from '../../../PlantsInfoGrid';
 import PlantInfoCard from '../../../PlantInfoCard';
 import PlantDropdown from '../../../form-components/PlantDropdown'
-import PlantNicknameTextInput from '../../../form-components/PlantNicknameTextInput';
+import useCreateUserPlant from '../../../../plants/hooks/mutations/useCreateUserPlant';
+import { useFormik } from 'formik';
 
 
 
 export default function index({show, setShow}) {
     const [plant, setPlant] = useState();
+    const createPlantMutation = useCreateUserPlant()
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const plantUuid = document.getElementById("plant-select").value;
-        const nickname = document.getElementById("nickname").value;
 
-        const payload = nickname ? {
-            plantUuid: plantUuid,
-            nickname: nickname
-        } :
-        {
-            plantUuid: plantUuid
-        };
-
-        const data = await ADD_USER_PLANT(payload);
-        data? setShow(false) : alert("Something went wrong");
+    const handleSubmit = async (payload) => {
+        const result = await createPlantMutation.mutateAsync({
+            nickname: payload.nickname,
+            plantUuid: payload.plantUuid
+        })
+        setShow(false)
          
     }
-
+    const formik = useFormik({
+        initialValues: {
+            plantUuid: "",
+            nickname: "",
+            plant: plant
+        },
+        onSubmit: handleSubmit
+    })
 
     const buttonProps = {
         type: "submit",
@@ -43,17 +44,23 @@ export default function index({show, setShow}) {
     }
     
   return (
-    <form id="new-plant-form" onSubmit={handleSubmit}>
+    <form id="new-plant-form" onSubmit={formik.handleSubmit}>
     <h2>Add a Plant</h2>
 
-    <PlantDropdown plant={plant} setPlant={setPlant}/>
-    <PlantNicknameTextInput/>
-    {plant ? 
+    <PlantDropdown plant={formik.values.plant} setPlant={setPlant} formik={formik}/>
+    <div className='input-group'>
+        <div className="input-group-prepend">
+            <label className="custom-form-label bold" htmlFor="nickname">Nickname</label>
+        </div>
+        <input id="nickname" className='form-control' type="text" placeholder='Optional' defaultValue={formik.values.nickname} onChange={formik.handleChange}></input>
+    </div>
+    {/* <PlantNicknameTextInput/> */}
+    {formik.values.plant ? 
     <>
-    <PlantInfoCard plant={plant}/>
+    <PlantInfoCard plant={formik.values.plant}/>
     <CustomButton {...buttonProps}/>
     </>
         : ""}
-</form>
+    </form>
   )
 }

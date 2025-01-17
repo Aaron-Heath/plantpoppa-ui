@@ -162,7 +162,7 @@ export default function index({plant, userPlant}) {
             </>
             : 
             <>
-                <div className='quick-status'>
+                <div className='quick-status size-20'>
                     <img src={plantIcon} alt="plant-status-icon" height="75px"/>
                 </div>
                 <PlantInfoCard plant={plant}/>
@@ -206,7 +206,7 @@ export default function index({plant, userPlant}) {
 
     const modalChildren = 
     <>
-    <ContentContainer children={contentChildren} classNames={["custom-modal-content"]}/>
+    <ContentContainer children={contentChildren} classNames={["custom-modal-content "]}/>
     </>
 
     const modalProps = {
@@ -219,16 +219,21 @@ export default function index({plant, userPlant}) {
   return (
     <>
     <CustomModal {...modalProps}/>
-    <div className='plant-item' key={userPlant.uuid} onClick={handleClick} data-id={userPlant.uuid}>
+    <div className='plant-item h-20' key={userPlant.uuid} onClick={handleClick} data-id={userPlant.uuid}>
         <div className='plant-info'>
-            <div className='plant-namespace'>{userPlant.nickname || plant.common_name}</div>
+            <div className='plant-namespace'>
+                <span className='md:font-bold'>{userPlant.nickname || plant.common_name}</span><span className='hidden italic text-sm md:inline'> - {userPlant.plant.scientific_name}</span>
+                <div className='hidden text-sm md:block'>
+                    Last Watered: {userPlant.lastWatered? dayjs(userPlant.lastWatered).format("MMM D, YYYY") : "No watering recorded"}
+                </div>
+            </div>
             <div className='quick-status'>
-                <img src={plantIcon} alt="plant-status-icon" height="75px"/>
+                <img className='object-contain size-20' src={plantIcon} alt="plant-status-icon" height="75px"/>
             </div>    
         </div>
         <div className='plant-actions'>
             <div>
-                <img id="water-icon" src={waterIcon} height="50px" alt="quick-water-action" data-id={userPlant.uuid} onClick={handleQuickWatering}/>
+                <img id="water-icon" className='object-contain size-12' src={waterIcon} height="50px" alt="quick-water-action" data-id={userPlant.uuid} onClick={handleQuickWatering}/>
             </div>
             
         </div>

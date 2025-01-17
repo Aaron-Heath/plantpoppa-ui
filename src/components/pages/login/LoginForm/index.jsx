@@ -7,12 +7,17 @@ import { useNavigate } from 'react-router-dom'
 import './style.css'
 import { provideButtonLoadingToggle } from '../../../../utils/providers'
 import { LOGIN } from '../../../../schemas/api-requests'
+import useLogin from '../../../../auth/hooks/mutations/useLogin'
+import { useFormik } from 'formik'
 
 
 
 export default function LoginForm() {
     const navigate = useNavigate();
+    const loginMutation = useLogin()
+
     const [badLogin, setBadLogin] = useState(false);
+    
     const [error, setError] = useState(false);
 
     const timeOutDelay = 800;
@@ -21,93 +26,73 @@ export default function LoginForm() {
     const loadingToggle = provideButtonLoadingToggle(loginBtnId);
 
     // Error handlers
-    const handleError = () => {
+    // const handleError = () => {
 
-        setTimeout(() => {
-            setError(true);
-            loadingToggle(false);
-        }, timeOutDelay);
-    }
+    //     setTimeout(() => {
+    //         setError(true);
+    //         loadingToggle(false);
+    //     }, timeOutDelay);
+    // }
 
-    const handleBadLogin = () => {
+    // const handleBadLogin = () => {
 
-        setTimeout(() => {
-            setBadLogin(true);
-            loadingToggle(false);
-        }, timeOutDelay);
-    }
+    //     setTimeout(() => {
+    //         setBadLogin(true);
+    //         loadingToggle(false);
+    //     }, timeOutDelay);
+    // }
     
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setBadLogin(false);
-        setError(false);
-        loadingToggle(true);
-        let response;
+    const handleSubmit = async (payload) => {
+       
+        const result = await loginMutation.mutateAsync({...formik.values})
 
-        
-        // get data
-        const payload = {
-            email: document.getElementById("email").value,
-            password: document.getElementById("password").value
-        }
-        
-        try {
-        response = await LOGIN(payload);
-
-        if (response.status == 401) {
-            handleBadLogin();
-            return;
-        }
-
-        // Successful login
-        if(response.status === 200){
-            const data = await response.json();
-            Auth.login(data.token);
-            navigate('/app');
-            return;
-        } else {
-            throw new Error("Something went wrong.");
-        } 
-
-            
-        } catch (error) {
-            // No response
-            if(!response) {
-                handleError();
-                return;
-            }
-            if (response.status != 404) {
-                handleError();
-                return;
-            }
+        if(result.status >= 200 && result.status < 300) {
+            navigate("/app")
         }
     }
 
-    const handleEdit = async (e) => {
-        if (badLogin) {setBadLogin(false)};
-        if (error) {setError(false)};
-    }
+    const formik = useFormik({
+        initialValues:{
+            'email': '',
+            'password': ''
+        },
+        onSubmit: handleSubmit
+    });
+
+    // const handleEdit = async (e) => {
+    //     if (badLogin) {setBadLogin(false)};
+    //     if (error) {setError(false)};
+    // }
+    console.log(loginMutation)
 
   return (
     <>
-          <form className='signup-login-form' onSubmit={handleSubmit}>
+          <form className='signup-login-form' onSubmit={formik.handleSubmit}>
         <h2>Login</h2>
         <div className='row'>
             <div className='col'>
-                <input type="text" id="email" onChange={handleEdit} className='form-control' placeholder="Email"/>
+                <input type="text" id="email" onChange={formik.handleChange} defaultValue={formik.values.email} className='form-control' placeholder="Email"/>
             </div>
         </div>
         <div className='row'>
             <div className='col'>
-                <input type="password" id="password" onChange={handleEdit} className='form-control' placeholder="Password"/>
+                <input type="password" id="password" onChange={formik.handleChange} defaultValue={formik.values.password} className='form-control' placeholder="Password"/>
             </div>
         </div>
-        {badLogin ? <p className='errorText'>Invalid username or password.</p> : <></>}
-        {error ? <p className='errorText'>Something went wrong. Please try again.</p> : <></>}
+        {loginMutation.isError && loginMutation.error.status === 401 ? <p className='errorText'>Invalid username or password.</p> : <></>}
+        {loginMutation.isError && loginMutation.error.status > 401 ? <p className='errorText'>Something went wrong. Please try again.</p> : <></>}
         <div className='row d-flex justify-content-center' >
+            {
+                loginMutation.isLoading? 
+            <button id="login" className='btn btn-primary btn-login-signup btn-loading' type='submit'>
+                <span className='btn-text'>Login</span>
+            </button>
+                :
             <button id="login" className='btn btn-primary btn-login-signup' type='submit'>
                 <span className='btn-text'>Login</span>
-                </button>
+            </button>
+            }
+
         </div>
         <LoginToggle pagePath={'/login'}/>
     </form>
